@@ -1,15 +1,42 @@
-```css
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
+
+:root {
+
+    --black: #111111;
+    --dark: #1c1c1c;
+
+    --grey: #6b7280;
+
+    --light-grey: #f5f5f5;
+
+    --border: #e7e7e7;
+
+    --white: #ffffff;
+
+    --green: #16a34a;
+
+    --red: #dc2626;
+
+    --blue: #2563eb;
+
+}
+
+
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f6f7f9;
-    color: #202124;
+
+    font-family: "Inter", sans-serif;
+
+    background: #f6f6f4;
+
+    color: var(--black);
+
     min-height: 100vh;
+
 }
 
 
@@ -18,149 +45,268 @@ body {
 ========================= */
 
 .top-header {
+
+    height: 76px;
+
     background: #ffffff;
-    border-bottom: 1px solid #e5e7eb;
+
+    border-bottom: 1px solid var(--border);
 
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
-    padding: 18px 6%;
+    padding: 0 6%;
 
     position: sticky;
+
     top: 0;
+
     z-index: 100;
+
 }
+
 
 .brand {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-}
-
-.logo,
-.modal-logo {
-    width: 52px;
-    height: 52px;
-
-    border-radius: 50%;
 
     display: flex;
+
     align-items: center;
-    justify-content: center;
+
+    gap: 13px;
+
+}
+
+
+.brand-logo,
+.small-logo {
+
+    width: 44px;
+
+    height: 44px;
 
     background: #111111;
-    color: #ffffff;
 
-    font-weight: bold;
-    font-size: 18px;
-}
-
-.brand h1 {
-    font-size: 21px;
-    margin-bottom: 3px;
-}
-
-.brand p {
-    color: #777777;
-    font-size: 13px;
-}
-
-.manager-button {
-    border: none;
-    background: #111111;
     color: white;
 
-    padding: 11px 18px;
+    border-radius: 12px;
 
-    border-radius: 8px;
+    display: flex;
 
-    cursor: pointer;
-    font-weight: bold;
+    align-items: center;
 
-    transition: 0.2s;
+    justify-content: center;
+
+    font-weight: 800;
+
+    font-size: 15px;
+
+    letter-spacing: -1px;
+
 }
 
-.manager-button:hover {
-    transform: translateY(-1px);
-    opacity: 0.9;
+
+.brand-text h1 {
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+}
+
+
+.brand-text p {
+
+    font-size: 11px;
+
+    color: var(--grey);
+
+    margin-top: 3px;
+
+}
+
+
+.manager-btn {
+
+    border: 1px solid #dddddd;
+
+    background: white;
+
+    border-radius: 10px;
+
+    padding: 11px 17px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    display: flex;
+
+    gap: 8px;
+
+    align-items: center;
+
+    transition: 0.2s;
+
+}
+
+
+.manager-btn:hover {
+
+    background: #111;
+
+    color: white;
+
 }
 
 
 /* =========================
-   MAIN
+   MAIN CONTAINER
 ========================= */
 
 .container {
-    width: 90%;
-    max-width: 1100px;
 
-    margin: 35px auto;
+    width: min(1100px, 92%);
+
+    margin: 35px auto 60px;
+
 }
 
 
 /* =========================
-   WELCOME CARD
+   HERO
 ========================= */
 
-.welcome-card {
+.hero-card {
+
     background: #111111;
+
     color: white;
 
-    border-radius: 18px;
+    border-radius: 22px;
 
-    padding: 32px;
+    padding: 42px;
 
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
 
-    gap: 25px;
+    margin-bottom: 22px;
 
-    margin-bottom: 25px;
+    overflow: hidden;
+
+    position: relative;
+
 }
 
-.small-title {
+
+.hero-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 280px;
+
+    height: 280px;
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    border-radius: 50%;
+
+    right: -90px;
+
+    top: -100px;
+
+}
+
+
+.eyebrow,
+.section-label {
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.8px;
+
+    color: #888;
+
+}
+
+
+.hero-card .eyebrow {
+
+    color: #999;
+
+}
+
+
+.hero-left h2 {
+
+    font-size: clamp(30px, 5vw, 45px);
+
+    margin: 8px 0 12px;
+
+    letter-spacing: -2px;
+
+}
+
+
+.hero-description {
+
+    color: #bcbcbc;
+
+    max-width: 500px;
+
+    line-height: 1.6;
+
+    font-size: 14px;
+
+}
+
+
+.live-clock {
+
+    text-align: right;
+
+    z-index: 2;
+
+}
+
+
+.live-clock p {
+
+    color: #999;
+
+    font-size: 12px;
+
+    margin-bottom: 5px;
+
+}
+
+
+#currentTime {
+
+    font-size: clamp(28px, 4vw, 42px);
+
+    font-weight: 700;
+
+    letter-spacing: -1px;
+
+}
+
+
+.live-clock span {
+
+    color: #777;
+
     font-size: 11px;
-    letter-spacing: 2px;
-    font-weight: bold;
-    opacity: 0.7;
-    margin-bottom: 7px;
-}
 
-.welcome-card h2 {
-    font-size: 32px;
-    margin-bottom: 10px;
-}
-
-.welcome-card p {
-    color: #cfcfcf;
-    line-height: 1.5;
-}
-
-.clock-box {
-    background: #ffffff;
-    color: #111111;
-
-    border-radius: 14px;
-
-    padding: 18px 25px;
-
-    min-width: 210px;
-
-    text-align: center;
-}
-
-.clock-box span {
-    display: block;
-    font-size: 13px;
-    color: #777777;
-    margin-bottom: 7px;
-}
-
-.clock-box strong {
-    display: block;
-    font-size: 25px;
 }
 
 
@@ -169,522 +315,686 @@ body {
 ========================= */
 
 .attendance-card,
-.records-card,
-.info-card,
-.manager-table-card {
+.records-card {
+
     background: white;
 
-    border: 1px solid #e7e7e7;
+    border: 1px solid var(--border);
 
-    border-radius: 15px;
+    border-radius: 20px;
 
-    padding: 28px;
+    padding: 30px;
 
-    margin-bottom: 25px;
-}
+    margin-bottom: 22px;
 
-.attendance-card h2,
-.records-card h2 {
-    margin-bottom: 7px;
-}
-
-.description {
-    color: #777777;
-    margin-bottom: 25px;
-}
-
-label {
-    display: block;
-
-    font-weight: bold;
-
-    margin-bottom: 8px;
-
-    font-size: 14px;
-}
-
-input {
-    width: 100%;
-
-    padding: 14px;
-
-    border: 1px solid #d7d7d7;
-
-    border-radius: 8px;
-
-    font-size: 15px;
-
-    outline: none;
-
-    transition: 0.2s;
-}
-
-input:focus {
-    border-color: #111111;
-}
-
-.button-row {
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    gap: 12px;
-
-    margin-top: 18px;
-}
-
-.button-row button {
-    border: none;
-
-    padding: 15px;
-
-    border-radius: 9px;
-
-    cursor: pointer;
-
-    font-size: 15px;
-
-    font-weight: bold;
-
-    transition: 0.2s;
-}
-
-.clock-in {
-    background: #111111;
-    color: white;
-}
-
-.clock-out {
-    background: #eeeeee;
-    color: #111111;
-}
-
-.button-row button:hover {
-    transform: translateY(-2px);
-}
-
-.message {
-    margin-top: 16px;
-
-    padding: 12px;
-
-    border-radius: 8px;
-
-    display: none;
-
-    font-size: 14px;
-}
-
-.message.success {
-    display: block;
-    background: #eeeeee;
-    color: #111111;
-}
-
-.message.error {
-    display: block;
-    background: #ffecec;
-    color: #a40000;
 }
 
 
-/* =========================
-   RECORDS
-========================= */
+.section-heading,
+.records-header {
 
-.section-heading {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 28px;
+
+}
+
+
+.section-heading h2,
+.records-header h2 {
+
+    margin-top: 5px;
+
+    font-size: 23px;
+
+    letter-spacing: -0.7px;
+
+}
+
+
+.status-indicator {
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    color: var(--green);
+
     display: flex;
 
     align-items: center;
 
-    justify-content: space-between;
+    gap: 7px;
 
-    gap: 15px;
-
-    margin-bottom: 20px;
-}
-
-.section-heading p {
-    color: #777777;
-    font-size: 14px;
-    margin-top: 4px;
-}
-
-.record-count {
-    background: #eeeeee;
-
-    padding: 7px 12px;
-
-    border-radius: 20px;
-
-    font-size: 13px;
 }
 
 
-.table-container {
-    width: 100%;
+.status-dot {
 
-    overflow-x: auto;
-}
+    width: 7px;
 
-table {
-    width: 100%;
+    height: 7px;
 
-    border-collapse: collapse;
+    background: var(--green);
 
-    min-width: 650px;
-}
+    border-radius: 50%;
 
-th {
-    background: #f5f5f5;
+    box-shadow: 0 0 0 4px #dcfce7;
 
-    text-align: left;
-
-    padding: 13px;
-
-    font-size: 12px;
-
-    color: #666666;
-}
-
-td {
-    padding: 14px 13px;
-
-    border-bottom: 1px solid #eeeeee;
-
-    font-size: 14px;
-}
-
-.status {
-    display: inline-block;
-
-    padding: 5px 9px;
-
-    border-radius: 20px;
-
-    font-size: 12px;
-
-    font-weight: bold;
-}
-
-.status-working {
-    background: #e8f5e9;
-    color: #1b5e20;
-}
-
-.status-completed {
-    background: #eeeeee;
-    color: #333333;
-}
-
-.empty-message {
-    text-align: center;
-
-    padding: 35px;
-
-    color: #888888;
-
-    display: none;
 }
 
 
 /* =========================
-   INFO CARDS
+   STAFF SELECT
 ========================= */
 
-.info-grid {
-    display: grid;
-
-    grid-template-columns: repeat(3, 1fr);
-
-    gap: 18px;
-}
-
-.info-card {
-    margin-bottom: 0;
-}
-
-.info-icon {
-    font-size: 27px;
+.staff-selection label {
 
     display: block;
 
-    margin-bottom: 12px;
+    font-size: 12px;
+
+    font-weight: 700;
+
+    margin-bottom: 9px;
+
 }
 
-.info-card h3 {
-    margin-bottom: 7px;
+
+.select-wrapper {
+
+    position: relative;
+
 }
 
-.info-card p {
-    color: #777777;
 
-    line-height: 1.5;
+.select-icon {
+
+    position: absolute;
+
+    left: 16px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    z-index: 2;
+
+}
+
+
+select,
+input {
+
+    width: 100%;
+
+    padding: 15px 16px 15px 45px;
+
+    border: 1px solid #dcdcdc;
+
+    border-radius: 11px;
+
+    font-family: inherit;
 
     font-size: 14px;
+
+    outline: none;
+
+    background: white;
+
+    transition: 0.2s;
+
+}
+
+
+select {
+
+    cursor: pointer;
+
+    appearance: none;
+
+    background-image:
+
+        linear-gradient(
+            45deg,
+            transparent 50%,
+            #777 50%
+        ),
+
+        linear-gradient(
+            135deg,
+            #777 50%,
+            transparent 50%
+        );
+
+    background-position:
+
+        calc(100% - 19px) 50%,
+        calc(100% - 14px) 50%;
+
+    background-size: 5px 5px, 5px 5px;
+
+    background-repeat: no-repeat;
+
+}
+
+
+select:focus,
+input:focus {
+
+    border-color: #111;
+
+    box-shadow: 0 0 0 3px #eeeeee;
+
 }
 
 
 /* =========================
-   MODAL
+   STAFF STATUS
 ========================= */
 
-.modal {
+.staff-status {
+
+    margin-top: 10px;
+
+    padding: 10px 13px;
+
+    border-radius: 9px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+}
+
+
+.staff-status.working {
+
+    background: #ecfdf3;
+
+    color: #15803d;
+
+}
+
+
+.staff-status.finished {
+
+    background: #eff6ff;
+
+    color: #1d4ed8;
+
+}
+
+
+.hidden {
+
     display: none;
 
-    position: fixed;
+}
 
-    inset: 0;
 
-    background: rgba(0, 0, 0, 0.6);
+/* =========================
+   ACTION BUTTONS
+========================= */
 
-    z-index: 500;
+.action-buttons {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 14px;
+
+    margin-top: 20px;
+
+}
+
+
+.action-btn {
+
+    border: none;
+
+    border-radius: 13px;
+
+    padding: 17px 20px;
+
+    cursor: pointer;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    text-align: left;
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+
+}
+
+
+.action-btn:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,0.12);
+
+}
+
+
+.action-btn strong {
+
+    display: block;
+
+    font-size: 14px;
+
+}
+
+
+.action-btn span {
+
+    display: block;
+
+    font-size: 11px;
+
+    margin-top: 3px;
+
+    opacity: 0.75;
+
+}
+
+
+.clock-in {
+
+    background: #111111;
+
+}
+
+
+.clock-out {
+
+    background: #eeeeee;
+
+    color: #111111;
+
+}
+
+
+.button-icon {
+
+    width: 35px;
+
+    height: 35px;
+
+    border-radius: 9px;
+
+    background:
+        rgba(255,255,255,0.13);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+
+.clock-out .button-icon {
+
+    background: #ffffff;
+
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+.message {
+
+    margin-top: 15px;
+
+    padding: 12px 14px;
+
+    border-radius: 9px;
+
+    font-size: 12px;
+
+    display: none;
+
+}
+
+
+.message.success {
+
+    display: block;
+
+    background: #ecfdf3;
+
+    color: #15803d;
+
+}
+
+
+.message.error {
+
+    display: block;
+
+    background: #fef2f2;
+
+    color: #b91c1c;
+
+}
+
+
+/* =========================
+   SUMMARY
+========================= */
+
+.summary-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+
+    margin-bottom: 22px;
+
+}
+
+
+.summary-card {
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 17px;
+
+    padding: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+}
+
+
+.summary-icon {
+
+    width: 42px;
+
+    height: 42px;
+
+    border-radius: 11px;
+
+    background: #f1f1f1;
+
+    display: flex;
 
     align-items: center;
 
     justify-content: center;
 
-    padding: 20px;
 }
 
-.modal.active {
-    display: flex;
+
+.summary-icon.green {
+
+    background: #ecfdf3;
+
 }
 
-.modal-content {
-    background: white;
 
-    width: 100%;
+.summary-icon.blue {
 
-    max-width: 420px;
+    background: #eff6ff;
 
-    border-radius: 16px;
-
-    padding: 32px;
-
-    position: relative;
-
-    animation: popup 0.2s ease;
 }
 
-@keyframes popup {
-    from {
-        transform: scale(0.95);
-        opacity: 0;
-    }
 
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
+.summary-card span {
+
+    display: block;
+
+    color: var(--grey);
+
+    font-size: 11px;
+
+    margin-bottom: 4px;
+
 }
 
-.close-button {
-    position: absolute;
 
-    right: 18px;
-    top: 15px;
+.summary-card strong {
 
-    border: none;
+    font-size: 22px;
 
-    background: transparent;
-
-    font-size: 28px;
-
-    cursor: pointer;
-
-    color: #777777;
 }
 
-.modal-logo {
-    margin-bottom: 17px;
-}
 
-.modal-content h2 {
-    margin-bottom: 7px;
-}
+/* =========================
+   TABLE
+========================= */
 
-.modal-content p {
-    color: #777777;
+.date-badge {
 
-    font-size: 14px;
+    background: #f3f3f3;
 
-    line-height: 1.5;
-
-    margin-bottom: 20px;
-}
-
-.modal-content label {
-    margin-top: 13px;
-}
-
-.login-button {
-    width: 100%;
-
-    margin-top: 20px;
-
-    padding: 14px;
-
-    border: none;
+    padding: 8px 12px;
 
     border-radius: 8px;
 
-    background: #111111;
+    font-size: 11px;
 
-    color: white;
+    color: #555;
 
-    font-weight: bold;
+    font-weight: 600;
 
-    cursor: pointer;
-}
-
-.login-message {
-    margin-top: 12px;
-
-    font-size: 13px;
-
-    color: #a40000;
-
-    text-align: center;
 }
 
 
-/* =========================
-   DASHBOARD
-========================= */
+.table-container {
 
-.dashboard {
-    display: none;
+    overflow-x: auto;
 
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 400;
-
-    background: #f6f7f9;
-
-    overflow-y: auto;
-}
-
-.dashboard.active {
-    display: block;
-}
-
-.dashboard-content {
-    width: 90%;
-
-    max-width: 1200px;
-
-    margin: 35px auto;
-}
-
-.dashboard-header {
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    margin-bottom: 25px;
-}
-
-.dashboard-header h2 {
-    font-size: 28px;
-}
-
-.logout-button {
-    background: white;
-
-    border: 1px solid #ddd;
-
-    padding: 10px 17px;
-
-    border-radius: 8px;
-
-    cursor: pointer;
 }
 
 
-/* =========================
-   STATS
-========================= */
+table {
 
-.stats-grid {
-    display: grid;
+    width: 100%;
 
-    grid-template-columns: repeat(3, 1fr);
+    border-collapse: collapse;
 
-    gap: 18px;
+    min-width: 650px;
 
-    margin-bottom: 25px;
-}
-
-.stat-card {
-    background: white;
-
-    border: 1px solid #e5e5e5;
-
-    border-radius: 14px;
-
-    padding: 22px;
-}
-
-.stat-card span {
-    font-size: 25px;
-}
-
-.stat-card strong {
-    display: block;
-
-    font-size: 28px;
-
-    margin-top: 10px;
-}
-
-.stat-card p {
-    color: #777777;
-
-    font-size: 13px;
-
-    margin-top: 4px;
 }
 
 
-/* =========================
-   DANGER BUTTON
-========================= */
+th {
 
-.danger-button {
-    border: none;
+    text-align: left;
 
-    background: #eeeeee;
+    font-size: 10px;
 
-    color: #222222;
+    color: #888;
 
-    padding: 9px 13px;
+    text-transform: uppercase;
 
-    border-radius: 7px;
+    letter-spacing: 0.8px;
 
-    cursor: pointer;
+    padding: 12px 10px;
+
+    border-bottom:
+        1px solid #eeeeee;
+
+}
+
+
+td {
+
+    padding: 16px 10px;
+
+    border-bottom:
+        1px solid #f0f0f0;
 
     font-size: 12px;
+
 }
 
-.danger-button:hover {
-    background: #dddddd;
+
+.staff-name-cell {
+
+    font-weight: 700;
+
 }
 
-.delete-button {
-    border: none;
 
-    background: #eeeeee;
+.status-badge {
+
+    display: inline-block;
 
     padding: 6px 9px;
 
-    border-radius: 6px;
+    border-radius: 20px;
 
-    cursor: pointer;
+    font-size: 10px;
+
+    font-weight: 700;
+
+}
+
+
+.status-working {
+
+    background: #dcfce7;
+
+    color: #15803d;
+
+}
+
+
+.status-completed {
+
+    background: #e5e7eb;
+
+    color: #4b5563;
+
+}
+
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty-state {
+
+    text-align: center;
+
+    padding: 45px 20px;
+
+}
+
+
+.empty-icon {
+
+    font-size: 30px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.empty-state h3 {
+
+    font-size: 14px;
+
+    margin-bottom: 5px;
+
+}
+
+
+.empty-state p {
+
+    color: #888;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================
+   INFO
+========================= */
+
+.info-section {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+
+}
+
+
+.info-card {
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 17px;
+
+    padding: 20px;
+
+    display: flex;
+
+    gap: 13px;
+
+}
+
+
+.info-card-icon {
+
+    font-size: 20px;
+
+}
+
+
+.info-card h3 {
+
+    font-size: 13px;
+
+    margin-bottom: 7px;
+
+}
+
+
+.info-card p {
+
+    color: #777;
+
+    font-size: 11px;
+
+    line-height: 1.6;
+
 }
 
 
@@ -693,21 +1003,587 @@ td {
 ========================= */
 
 footer {
-    text-align: center;
 
-    padding: 30px 20px;
+    background: #111;
 
-    color: #888888;
+    color: white;
+
+    padding: 25px 6%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+}
+
+
+.footer-brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
 
     font-size: 13px;
 
-    border-top: 1px solid #eeeeee;
-
-    margin-top: 40px;
 }
 
-footer p:first-child {
-    margin-bottom: 5px;
+
+.small-logo {
+
+    width: 32px;
+
+    height: 32px;
+
+    border-radius: 8px;
+
+    background: white;
+
+    color: #111;
+
+    font-size: 11px;
+
+}
+
+
+footer p {
+
+    color: #777;
+
+    font-size: 11px;
+
+}
+
+
+/* =========================
+   LOGIN MODAL
+========================= */
+
+.modal,
+.dashboard-modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(0,0,0,0.65);
+
+    backdrop-filter: blur(6px);
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    z-index: 500;
+
+}
+
+
+.modal.show,
+.dashboard-modal.show {
+
+    display: flex;
+
+}
+
+
+.modal-box {
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 35px;
+
+    width: min(430px, 100%);
+
+    position: relative;
+
+    box-shadow:
+        0 20px 70px
+        rgba(0,0,0,0.25);
+
+}
+
+
+.close-btn,
+.dashboard-close {
+
+    position: absolute;
+
+    right: 20px;
+
+    top: 17px;
+
+    border: none;
+
+    background: #f2f2f2;
+
+    width: 32px;
+
+    height: 32px;
+
+    border-radius: 50%;
+
+    font-size: 21px;
+
+    cursor: pointer;
+
+}
+
+
+.login-icon {
+
+    width: 50px;
+
+    height: 50px;
+
+    border-radius: 14px;
+
+    background: #f1f1f1;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 22px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.modal-box h2 {
+
+    margin-top: 6px;
+
+    font-size: 25px;
+
+}
+
+
+.modal-description {
+
+    color: #777;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    margin: 8px 0 25px;
+
+}
+
+
+.modal-box label {
+
+    display: block;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    margin-bottom: 8px;
+
+}
+
+
+.modal-box input {
+
+    padding-left: 15px;
+
+    margin-bottom: 17px;
+
+}
+
+
+.login-submit {
+
+    width: 100%;
+
+    background: #111;
+
+    color: white;
+
+    border: none;
+
+    padding: 14px;
+
+    border-radius: 10px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+}
+
+
+.login-message {
+
+    font-size: 12px;
+
+    color: var(--red);
+
+    margin-bottom: 10px;
+
+}
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+.dashboard-box {
+
+    width: min(1150px, 100%);
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: white;
+
+    border-radius: 22px;
+
+    padding: 30px;
+
+}
+
+
+.dashboard-header {
+
+    position: relative;
+
+    margin-bottom: 25px;
+
+}
+
+
+.dashboard-header h2 {
+
+    font-size: 26px;
+
+    margin: 5px 0;
+
+}
+
+
+.dashboard-header p {
+
+    color: #777;
+
+    font-size: 12px;
+
+}
+
+
+.dashboard-stats {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.dashboard-stat {
+
+    background: #f6f6f6;
+
+    border-radius: 14px;
+
+    padding: 20px;
+
+}
+
+
+.dashboard-stat span {
+
+    color: #777;
+
+    font-size: 11px;
+
+    display: block;
+
+    margin-bottom: 8px;
+
+}
+
+
+.dashboard-stat strong {
+
+    font-size: 26px;
+
+}
+
+
+/* =========================
+   STAFF HOURS
+========================= */
+
+.hours-section {
+
+    background: #f8f8f8;
+
+    border: 1px solid #eeeeee;
+
+    border-radius: 16px;
+
+    padding: 22px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.hours-section-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 18px;
+
+}
+
+
+.hours-section-header h3 {
+
+    font-size: 17px;
+
+    margin-top: 5px;
+
+}
+
+
+.hours-period {
+
+    font-size: 10px;
+
+    color: #777;
+
+    background: white;
+
+    border: 1px solid #e5e5e5;
+
+    padding: 7px 10px;
+
+    border-radius: 7px;
+
+}
+
+
+.staff-hours-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 12px;
+
+}
+
+
+.staff-hours-card {
+
+    background: white;
+
+    border: 1px solid #e7e7e7;
+
+    border-radius: 13px;
+
+    padding: 16px;
+
+    transition: 0.2s;
+
+}
+
+
+.staff-hours-card:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 15px
+        rgba(0,0,0,0.06);
+
+}
+
+
+.staff-hours-top {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 13px;
+
+}
+
+
+.staff-avatar {
+
+    width: 35px;
+
+    height: 35px;
+
+    background: #111;
+
+    color: white;
+
+    border-radius: 9px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+}
+
+
+.staff-hours-name {
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+}
+
+
+.staff-hours-label {
+
+    color: #888;
+
+    font-size: 10px;
+
+    display: block;
+
+    margin-bottom: 4px;
+
+}
+
+
+.staff-hours-total {
+
+    font-size: 22px;
+
+    font-weight: 800;
+
+}
+
+
+.staff-hours-status {
+
+    font-size: 9px;
+
+    color: #888;
+
+    margin-top: 4px;
+
+}
+
+
+/* =========================
+   DASHBOARD TABLE
+========================= */
+
+.dashboard-table-container {
+
+    overflow-x: auto;
+
+}
+
+
+.dashboard-footer {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 25px;
+
+    gap: 10px;
+
+}
+
+
+.danger-btn,
+.logout-btn {
+
+    padding: 11px 16px;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+}
+
+
+.danger-btn {
+
+    border: 1px solid #fecaca;
+
+    background: #fef2f2;
+
+    color: #dc2626;
+
+}
+
+
+.logout-btn {
+
+    border: none;
+
+    background: #111;
+
+    color: white;
+
+}
+
+
+.delete-btn {
+
+    border: none;
+
+    background: #fef2f2;
+
+    color: #dc2626;
+
+    padding: 6px 9px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    font-size: 10px;
+
 }
 
 
@@ -715,93 +1591,155 @@ footer p:first-child {
    MOBILE
 ========================= */
 
+@media (max-width: 800px) {
+
+
+    .staff-hours-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    .dashboard-stats {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+}
+
+
 @media (max-width: 750px) {
 
+
     .top-header {
-        padding: 14px 5%;
+
+        height: 68px;
+
+        padding: 0 5%;
+
     }
 
-    .brand h1 {
-        font-size: 17px;
-    }
 
-    .brand p {
-        font-size: 11px;
-    }
+    .manager-btn {
 
-    .logo {
-        width: 43px;
-        height: 43px;
-        font-size: 15px;
-    }
-
-    .manager-button {
         padding: 9px 11px;
-        font-size: 12px;
+
+        font-size: 11px;
+
     }
+
 
     .container {
+
         width: 94%;
+
         margin-top: 20px;
+
     }
 
-    .welcome-card {
+
+    .hero-card {
+
+        padding: 27px 22px;
+
         flex-direction: column;
 
-        align-items: stretch;
+        align-items: flex-start;
 
-        padding: 24px;
+        gap: 25px;
+
     }
 
-    .welcome-card h2 {
-        font-size: 26px;
+
+    .live-clock {
+
+        text-align: left;
+
     }
 
-    .clock-box {
-        width: 100%;
-    }
 
     .attendance-card,
     .records-card {
-        padding: 20px;
+
+        padding: 22px 17px;
+
     }
 
-    .button-row {
-        grid-template-columns: 1fr;
-    }
 
-    .info-grid {
-        grid-template-columns: 1fr;
-    }
+    .section-heading,
+    .records-header {
 
-    .section-heading {
         align-items: flex-start;
 
-        flex-direction: column;
+        gap: 10px;
+
     }
 
-    .stats-grid {
+
+    .action-buttons {
+
         grid-template-columns: 1fr;
+
     }
 
-    .dashboard-content {
-        width: 94%;
+
+    .summary-grid,
+    .info-section {
+
+        grid-template-columns: 1fr;
+
     }
 
-    .dashboard-header {
+
+    footer {
+
+        flex-direction: column;
+
+        gap: 12px;
+
         align-items: flex-start;
 
-        flex-direction: column;
-
-        gap: 15px;
     }
+
+
+    .dashboard-box {
+
+        padding: 22px 15px;
+
+    }
+
 
     .dashboard-header h2 {
-        font-size: 24px;
+
+        font-size: 21px;
+
     }
 
-    .modal-content {
-        padding: 25px;
-    }
+
 }
-```
+
+
+@media (max-width: 500px) {
+
+
+    .hours-section-header {
+
+        align-items: flex-start;
+
+        gap: 10px;
+
+    }
+
+
+    .staff-hours-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+}
