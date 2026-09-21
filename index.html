@@ -526,110 +526,296 @@
 
     <!-- ================= MANAGER DASHBOARD ================= -->
 
-    <div id="dashboardModal" class="dashboard-modal">
+    <!-- =========================================
+     MANAGER DASHBOARD
+========================================= -->
 
-        <div class="dashboard-box">
+<div id="dashboardModal" class="dashboard-overlay">
 
-            <div class="dashboard-header">
+    <div class="manager-dashboard">
 
-                <div>
-                    <span>MANAGER AREA</span>
-                    <h2>Manager Dashboard</h2>
-                    <p>Staff attendance and total hours</p>
+        <!-- DASHBOARD HEADER -->
+
+        <header class="dashboard-header">
+
+            <div class="dashboard-brand">
+
+                <div class="dashboard-logo">
+                    KP
                 </div>
 
-                <button onclick="closeDashboard()">
-                    <i class="fa-solid fa-xmark"></i>
+                <div>
+                    <h1>K.P.'s Kitchen</h1>
+                    <p>Manager Dashboard</p>
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-header-right">
+
+                <div class="dashboard-date">
+
+                    <span id="dashboardDate">
+                        Monday, 21 September 2026
+                    </span>
+
+                    <strong id="dashboardTime">
+                        07:04:37 pm
+                    </strong>
+
+                </div>
+
+                <button
+                    class="close-dashboard-btn"
+                    onclick="closeDashboard()">
+
+                    ✕ Close
+
                 </button>
 
             </div>
 
+        </header>
 
-            <!-- DASHBOARD STATS -->
 
-            <div class="dashboard-stats">
+        <!-- DASHBOARD CONTENT -->
+
+        <main class="dashboard-content">
+
+
+            <!-- TITLE -->
+
+            <div class="dashboard-title">
 
                 <div>
-                    <span>Total Staff</span>
-                    <strong id="dashboardStaff">8</strong>
+
+                    <span class="dashboard-label">
+                        MANAGEMENT
+                    </span>
+
+                    <h2>Staff Attendance</h2>
+
+                    <p>
+                        View staff shifts, working hours and attendance records.
+                    </p>
+
                 </div>
 
-                <div>
-                    <span>Completed Shifts</span>
-                    <strong id="dashboardCompleted">0</strong>
-                </div>
-
-                <div>
-                    <span>Total Hours</span>
-                    <strong id="dashboardHours">0h 0m</strong>
+                <div class="system-online-large">
+                    <span></span>
+                    System Online
                 </div>
 
             </div>
+
+
+            <!-- SUMMARY CARDS -->
+
+            <section class="manager-summary-grid">
+
+
+                <div class="manager-summary-card blue">
+
+                    <div class="summary-icon">
+                        👥
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Staff Members
+                        </span>
+
+                        <strong id="managerStaffCount">
+                            8
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="manager-summary-card green">
+
+                    <div class="summary-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Currently Working
+                        </span>
+
+                        <strong id="managerWorkingCount">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="manager-summary-card purple">
+
+                    <div class="summary-icon">
+                        ◷
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Total Hours
+                        </span>
+
+                        <strong id="managerTotalHours">
+                            0h 0m
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="manager-summary-card orange">
+
+                    <div class="summary-icon">
+                        ▣
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Total Entries
+                        </span>
+
+                        <strong id="managerEntryCount">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </section>
 
 
             <!-- STAFF HOURS -->
 
-            <h3 class="dashboard-section-title">
-                Staff Hours
-            </h3>
+            <section class="dashboard-panel">
 
-            <div id="staffHoursGrid" class="staff-hours-grid">
-                <!-- Javascript -->
-            </div>
+                <div class="panel-heading">
 
+                    <div>
 
-            <!-- ALL RECORDS -->
+                        <span class="panel-label">
+                            STAFF OVERVIEW
+                        </span>
 
-            <h3 class="dashboard-section-title">
-                Attendance Records
-            </h3>
+                        <h3>Staff Hours</h3>
 
-            <div class="dashboard-table-wrapper">
+                        <p>
+                            Total recorded hours for each staff member.
+                        </p>
 
-                <table>
+                    </div>
 
-                    <thead>
-
-                        <tr>
-                            <th>Staff</th>
-                            <th>Date</th>
-                            <th>Clock In</th>
-                            <th>Clock Out</th>
-                            <th>Hours</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-
-                    </thead>
-
-                    <tbody id="allRecordsTable">
-
-                    </tbody>
-
-                </table>
-
-            </div>
+                </div>
 
 
-            <div class="dashboard-actions">
+                <div
+                    id="dashboardBody"
+                    class="staff-hours-grid">
+                </div>
 
-                <button onclick="clearAllRecords()" class="danger-btn">
-                    <i class="fa-solid fa-trash"></i>
-                    Clear All Records
-                </button>
+            </section>
 
-                <button onclick="closeDashboard()" class="secondary-btn">
-                    Close
-                </button>
 
-            </div>
+            <!-- ALL ATTENDANCE RECORDS -->
 
-        </div>
+            <section class="dashboard-panel records-panel">
+
+                <div class="panel-heading records-heading">
+
+                    <div>
+
+                        <span class="panel-label">
+                            ATTENDANCE RECORDS
+                        </span>
+
+                        <h3>All Staff Entries</h3>
+
+                        <p>
+                            Complete attendance history recorded by the system.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        class="clear-records-btn"
+                        onclick="clearAllRecords()">
+
+                        🗑 Clear All Records
+
+                    </button>
+
+                </div>
+
+
+                <div class="records-table-wrapper">
+
+                    <table class="manager-records-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Staff Member</th>
+
+                                <th>Date</th>
+
+                                <th>Clock In</th>
+
+                                <th>Clock Out</th>
+
+                                <th>Hours</th>
+
+                                <th>Status</th>
+
+                                <th>Action</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="allRecordsBody">
+
+                            <tr>
+
+                                <td
+                                    colspan="7"
+                                    class="empty-dashboard">
+
+                                    No attendance records.
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+        </main>
 
     </div>
 
-
-    <script src="script.js"></script>
-
-</body>
-</html>
+</div>
