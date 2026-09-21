@@ -1,0 +1,335 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>K.P.'s Kitchen | Staff Attendance</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="top-header">
+        <div class="brand">
+            <div class="logo">KP</div>
+
+            <div>
+                <h1>K.P.'s Kitchen</h1>
+                <p>Staff Attendance System</p>
+            </div>
+        </div>
+
+        <button id="managerLoginButton" class="manager-button">
+            Manager Login
+        </button>
+    </header>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="container">
+
+        <!-- WELCOME -->
+        <section class="welcome-card">
+            <div>
+                <p class="small-title">WELCOME TO</p>
+                <h2>K.P.'s Kitchen</h2>
+
+                <p>
+                    Staff can clock in and clock out using the current
+                    date and time from this device.
+                </p>
+            </div>
+
+            <div class="clock-box">
+                <span id="currentDate">Loading date...</span>
+                <strong id="currentTime">00:00:00</strong>
+            </div>
+        </section>
+
+
+        <!-- STAFF CLOCK IN -->
+        <section class="attendance-card">
+
+            <h2>Staff Attendance</h2>
+
+            <p class="description">
+                Enter your name and select an attendance action.
+            </p>
+
+            <label for="staffName">Staff Name</label>
+
+            <input
+                type="text"
+                id="staffName"
+                placeholder="Enter staff name"
+                autocomplete="off"
+            >
+
+            <div class="button-row">
+
+                <button id="clockInButton" class="clock-in">
+                    🟢 Clock In
+                </button>
+
+                <button id="clockOutButton" class="clock-out">
+                    🔴 Clock Out
+                </button>
+
+            </div>
+
+            <div id="message" class="message"></div>
+
+        </section>
+
+
+        <!-- TODAY'S RECORDS -->
+        <section class="records-card">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Today's Attendance</h2>
+                    <p>Attendance recorded on this device.</p>
+                </div>
+
+                <span id="recordCount" class="record-count">
+                    0 records
+                </span>
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Staff Name</th>
+                            <th>Shift Start</th>
+                            <th>Shift End</th>
+                            <th>Duration</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="attendanceTableBody">
+                    </tbody>
+
+                </table>
+
+                <div id="emptyMessage" class="empty-message">
+                    No attendance records for today.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- INFORMATION CARDS -->
+        <section class="info-grid">
+
+            <div class="info-card">
+                <span class="info-icon">🕐</span>
+                <h3>Automatic Time</h3>
+                <p>
+                    The system automatically uses the current date
+                    and time from your device.
+                </p>
+            </div>
+
+            <div class="info-card">
+                <span class="info-icon">📋</span>
+                <h3>Attendance Records</h3>
+                <p>
+                    Clock-in and clock-out records are stored in
+                    this browser.
+                </p>
+            </div>
+
+            <div class="info-card">
+                <span class="info-icon">🔐</span>
+                <h3>Manager Access</h3>
+                <p>
+                    Managers can view and manage attendance records.
+                </p>
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- MANAGER LOGIN MODAL -->
+    <div id="loginModal" class="modal">
+
+        <div class="modal-content">
+
+            <button id="closeLogin" class="close-button">
+                &times;
+            </button>
+
+            <div class="modal-logo">
+                KP
+            </div>
+
+            <h2>Manager Login</h2>
+
+            <p>
+                Enter the manager credentials to access the dashboard.
+            </p>
+
+            <label for="managerUsername">
+                Username
+            </label>
+
+            <input
+                type="text"
+                id="managerUsername"
+                placeholder="Username"
+                autocomplete="username"
+            >
+
+            <label for="managerPassword">
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="managerPassword"
+                placeholder="Password"
+                autocomplete="current-password"
+            >
+
+            <button id="loginButton" class="login-button">
+                Login
+            </button>
+
+            <div id="loginMessage" class="login-message"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- MANAGER DASHBOARD -->
+    <div id="managerDashboard" class="dashboard">
+
+        <div class="dashboard-content">
+
+            <div class="dashboard-header">
+
+                <div>
+                    <p class="small-title">MANAGER AREA</p>
+                    <h2>Attendance Dashboard</h2>
+                    <p>
+                        Manage K.P.'s Kitchen staff attendance.
+                    </p>
+                </div>
+
+                <button id="logoutButton" class="logout-button">
+                    Logout
+                </button>
+
+            </div>
+
+
+            <!-- DASHBOARD STATS -->
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <span>👥</span>
+                    <strong id="totalRecords">0</strong>
+                    <p>Total Records</p>
+                </div>
+
+                <div class="stat-card">
+                    <span>🟢</span>
+                    <strong id="activeStaff">0</strong>
+                    <p>Currently Working</p>
+                </div>
+
+                <div class="stat-card">
+                    <span>✅</span>
+                    <strong id="completedShifts">0</strong>
+                    <p>Completed Shifts</p>
+                </div>
+
+            </div>
+
+
+            <!-- MANAGER TABLE -->
+            <section class="manager-table-card">
+
+                <div class="section-heading">
+
+                    <div>
+                        <h3>All Attendance Records</h3>
+                        <p>
+                            Records saved on this browser.
+                        </p>
+                    </div>
+
+                    <button id="clearRecordsButton" class="danger-button">
+                        Clear All Records
+                    </button>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Staff Name</th>
+                                <th>Shift Start</th>
+                                <th>Shift End</th>
+                                <th>Duration</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="managerTableBody">
+                        </tbody>
+
+                    </table>
+
+                    <div id="managerEmptyMessage" class="empty-message">
+                        No attendance records available.
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </div>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <p>
+            © <span id="footerYear"></span> K.P.'s Kitchen
+        </p>
+
+        <p>
+            Staff Attendance System
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
+```
