@@ -1,69 +1,75 @@
-/* =========================================
-   K.P.'S KITCHEN
-   STAFF ATTENDANCE SYSTEM
-========================================= */
-
-
-/* =========================
-   STAFF LIST
-========================= */
-
 const STAFF_NAMES = [
-
     "Vedant",
-
     "Jinal",
-
     "Divya",
-
     "Mittal",
-
     "Trupti",
-
     "Harsh",
-
     "JK",
-
     "Kush"
-
 ];
 
 
-/* =========================
-   MANAGER LOGIN
-========================= */
+// ================================
+// LOGIN DETAILS
+// ================================
 
+// Staff PINs
+const STAFF_PINS = {
+    Vedant: "1111",
+    Jinal: "2222",
+    Divya: "3333",
+    Mittal: "4444",
+    Trupti: "5555",
+    Harsh: "6666",
+    JK: "7777",
+    Kush: "8888"
+};
+
+// Manager login
 const MANAGER_USERNAME = "manager";
-
 const MANAGER_PASSWORD = "kp1234";
 
 
-/* =========================
-   LOCAL STORAGE
-========================= */
+// ================================
+// STORAGE
+// ================================
 
-const STORAGE_KEY =
-    "kpsKitchenAttendance";
+const STORAGE_KEY = "kpsKitchenAttendance";
+
+let selectedStaffForLogin = null;
 
 
-/* =========================
-   GET RECORDS
-========================= */
+// ================================
+// GET RECORDS
+// ================================
 
 function getRecords() {
 
-    return JSON.parse(
-        localStorage.getItem(
-            STORAGE_KEY
-        )
-    ) || [];
+    try {
 
+        const saved = localStorage.getItem(STORAGE_KEY);
+
+        if (!saved) {
+            return [];
+        }
+
+        const records = JSON.parse(saved);
+
+        return Array.isArray(records) ? records : [];
+
+    } catch (error) {
+
+        console.error("Could not load attendance records:", error);
+
+        return [];
+    }
 }
 
 
-/* =========================
-   SAVE RECORDS
-========================= */
+// ================================
+// SAVE RECORDS
+// ================================
 
 function saveRecords(records) {
 
@@ -75,24 +81,31 @@ function saveRecords(records) {
 }
 
 
-/* =========================
-   CURRENT DATE
-========================= */
+// ================================
+// LOCAL DATE
+// ================================
 
-function getCurrentDate() {
+function getLocalDate() {
 
     const now = new Date();
 
-    return now
-        .toISOString()
-        .split("T")[0];
+    const year = now.getFullYear();
 
+    const month = String(
+        now.getMonth() + 1
+    ).padStart(2, "0");
+
+    const day = String(
+        now.getDate()
+    ).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
 }
 
 
-/* =========================
-   CURRENT TIME
-========================= */
+// ================================
+// CURRENT TIME
+// ================================
 
 function getCurrentTime() {
 
@@ -107,79 +120,18 @@ function getCurrentTime() {
             hour12: true
         }
     );
-
 }
 
 
-/* =========================
-   FORMAT DATE
-========================= */
+// ================================
+// DISPLAY DATE
+// ================================
 
-function formatDate(dateString) {
-
-    const date =
-        new Date(
-            dateString + "T00:00:00"
-        );
-
-
-    return date.toLocaleDateString(
-        "en-AU",
-        {
-            day: "numeric",
-            month: "short",
-            year: "numeric"
-        }
-    );
-
-}
-
-
-/* =========================
-   FORMAT TIME
-========================= */
-
-function formatTime(time) {
-
-    if (!time) {
-
-        return "-";
-
-    }
-
-    return time;
-
-}
-
-
-/* =========================
-   LIVE CLOCK
-========================= */
-
-function updateClock() {
+function updateDateTime() {
 
     const now = new Date();
 
-
-    document.getElementById(
-        "currentTime"
-    ).textContent =
-
-        now.toLocaleTimeString(
-            "en-AU",
-            {
-                hour: "2-digit",
-                minute: "2-digit",
-                second: "2-digit",
-                hour12: true
-            }
-        );
-
-
-    document.getElementById(
-        "currentDate"
-    ).textContent =
-
+    document.getElementById("currentDate").textContent =
         now.toLocaleDateString(
             "en-AU",
             {
@@ -190,968 +142,611 @@ function updateClock() {
             }
         );
 
-
-    document.getElementById(
-        "todayDateBadge"
-    ).textContent =
-
-        now.toLocaleDateString(
+    document.getElementById("currentTime").textContent =
+        now.toLocaleTimeString(
             "en-AU",
             {
-                day: "numeric",
-                month: "short",
-                year: "numeric"
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+                hour12: true
             }
         );
-
 }
 
 
-setInterval(
-    updateClock,
-    1000
-);
+// ================================
+// FIND ACTIVE SHIFT
+// ================================
 
-updateClock();
+function getActiveShift(staffName) {
 
+    const records = getRecords();
 
-/* =========================
-   MESSAGE
-========================= */
+    return records.find(function(record) {
 
-function showMessage(
-    message,
-    type
-) {
-
-    const messageBox =
-        document.getElementById(
-            "message"
+        return (
+            record.name === staffName &&
+            record.clockOut === null
         );
 
-
-    messageBox.textContent =
-        message;
-
-
-    messageBox.className =
-        "message " + type;
-
-
-    setTimeout(
-        function() {
-
-            messageBox.className =
-                "message";
-
-        },
-        4000
-    );
+    });
 
 }
 
 
-/* =========================
-   CHECK STAFF STATUS
-========================= */
+// ================================
+// CHECK STAFF STATUS
+// ================================
 
 function checkStaffStatus() {
 
-    const name =
-        document.getElementById(
-            "staffName"
-        ).value;
-
-
-    const statusBox =
-        document.getElementById(
-            "staffStatus"
-        );
-
-
-    if (!name) {
-
-        statusBox.className =
-            "staff-status hidden";
-
-        statusBox.textContent = "";
-
-        return;
-
-    }
-
-
-    const records =
-        getRecords();
-
-
-    const today =
-        getCurrentDate();
-
-
-    const activeRecord =
-        records.find(
-            function(record) {
-
-                return (
-
-                    record.name === name &&
-
-                    record.date === today &&
-
-                    !record.clockOut
-
-                );
-
-            }
-        );
-
-
-    if (activeRecord) {
-
-        statusBox.className =
-            "staff-status working";
-
-
-        statusBox.textContent =
-
-            "● " +
-            name +
-            " is currently working. Clock-in: " +
-            activeRecord.clockIn;
-
-    }
-
-    else {
-
-        statusBox.className =
-            "staff-status";
-
-
-        statusBox.textContent =
-            "Ready to clock in.";
-
-    }
-
-}
-
-
-/* =========================
-   CLOCK IN
-========================= */
-
-function clockIn() {
-
     const staffName =
-        document.getElementById(
-            "staffName"
-        ).value;
+        document.getElementById("staffName").value;
+
+    const status =
+        document.getElementById("staffStatus");
+
+    const startButton =
+        document.getElementById("startShiftBtn");
+
+    const endButton =
+        document.getElementById("endShiftBtn");
 
 
     if (!staffName) {
 
-        showMessage(
-            "Please select your name before clocking in.",
-            "error"
-        );
+        status.textContent =
+            "Please select your name.";
+
+        status.className = "status";
+
+        startButton.disabled = false;
+
+        endButton.disabled = true;
 
         return;
-
     }
 
 
-    const records =
-        getRecords();
+    const activeShift =
+        getActiveShift(staffName);
 
 
-    const today =
-        getCurrentDate();
+    if (activeShift) {
+
+        status.textContent =
+            `${staffName} is currently working. Started at ${activeShift.clockIn}.`;
+
+        status.className =
+            "status active";
+
+        startButton.disabled = true;
+
+        endButton.disabled = false;
+
+    } else {
+
+        status.textContent =
+            `${staffName} is ready to start a shift.`;
+
+        status.className =
+            "status ready";
+
+        startButton.disabled = false;
+
+        endButton.disabled = true;
+    }
+}
 
 
-    const alreadyWorking =
-        records.find(
-            function(record) {
+// ================================
+// START SHIFT
+// ================================
 
-                return (
+function startShift() {
 
-                    record.name === staffName &&
-
-                    record.date === today &&
-
-                    !record.clockOut
-
-                );
-
-            }
-        );
+    const staffName =
+        document.getElementById("staffName").value;
 
 
-    if (alreadyWorking) {
+    if (!staffName) {
 
-        showMessage(
-            staffName +
-            " is already clocked in.",
-            "error"
-        );
-
-        checkStaffStatus();
+        alert("Please select your name first.");
 
         return;
-
     }
 
 
-    const newRecord = {
+    const activeShift =
+        getActiveShift(staffName);
+
+
+    if (activeShift) {
+
+        alert(
+            `${staffName} already has an active shift.`
+        );
+
+        return;
+    }
+
+
+    selectedStaffForLogin = staffName;
+
+    document.getElementById("staffPin").value = "";
+
+    document.getElementById("staffLoginError").textContent = "";
+
+    document.getElementById("staffLoginMessage").textContent =
+        `Enter ${staffName}'s PIN to start the shift.`;
+
+
+    document
+        .getElementById("staffLoginModal")
+        .classList.add("show");
+
+
+    setTimeout(function() {
+
+        document
+            .getElementById("staffPin")
+            .focus();
+
+    }, 100);
+
+}
+
+
+// ================================
+// CONFIRM STAFF LOGIN
+// ================================
+
+function confirmStaffLogin() {
+
+    const pin =
+        document.getElementById("staffPin").value.trim();
+
+    const error =
+        document.getElementById("staffLoginError");
+
+
+    if (!selectedStaffForLogin) {
+
+        error.textContent =
+            "Please select your name again.";
+
+        return;
+    }
+
+
+    const correctPin =
+        STAFF_PINS[selectedStaffForLogin];
+
+
+    if (pin !== correctPin) {
+
+        error.textContent =
+            "Incorrect PIN. Please try again.";
+
+        document.getElementById("staffPin").value = "";
+
+        return;
+    }
+
+
+    // LOGIN SUCCESSFUL
+
+    const now = new Date();
+
+    const record = {
 
         id: Date.now(),
 
-        name: staffName,
+        name: selectedStaffForLogin,
 
-        date: today,
+        date: getLocalDate(),
 
         clockIn: getCurrentTime(),
 
         clockOut: null,
 
-        startTimestamp: Date.now(),
+        startTimestamp: now.getTime(),
 
         endTimestamp: null
 
     };
 
 
-    records.push(
-        newRecord
+    const records = getRecords();
+
+    records.push(record);
+
+    saveRecords(records);
+
+
+    closeStaffLogin();
+
+
+    alert(
+        `Shift started successfully for ${selectedStaffForLogin} at ${record.clockIn}.`
     );
-
-
-    saveRecords(
-        records
-    );
-
-
-    showMessage(
-
-        "✓ " +
-        staffName +
-        " successfully clocked in at " +
-        newRecord.clockIn,
-
-        "success"
-
-    );
-
-
-    document.getElementById(
-        "staffName"
-    ).value = "";
 
 
     checkStaffStatus();
 
-    renderTodayRecords();
+    renderToday();
 
-    updateSummary();
-
-    updateManagerDashboard();
-
-    renderStaffHours();
+    renderSummary();
 
 }
 
 
-/* =========================
-   CLOCK OUT
-========================= */
+// ================================
+// CLOSE STAFF LOGIN
+// ================================
 
-function clockOut() {
+function closeStaffLogin() {
+
+    document
+        .getElementById("staffLoginModal")
+        .classList.remove("show");
+
+    document.getElementById("staffPin").value = "";
+
+    document.getElementById("staffLoginError").textContent = "";
+
+    selectedStaffForLogin = null;
+}
+
+
+// ================================
+// END SHIFT
+// ================================
+
+function endShift() {
 
     const staffName =
-        document.getElementById(
-            "staffName"
-        ).value;
+        document.getElementById("staffName").value;
 
 
     if (!staffName) {
 
-        showMessage(
-            "Please select your name before clocking out.",
-            "error"
-        );
+        alert("Please select your name.");
 
         return;
-
     }
 
 
-    const records =
-        getRecords();
+    const records = getRecords();
 
 
-    const today =
-        getCurrentDate();
+    const activeIndex =
+        records.findIndex(function(record) {
+
+            return (
+                record.name === staffName &&
+                record.clockOut === null
+            );
+
+        });
 
 
-    const activeRecord =
-        records.find(
-            function(record) {
+    if (activeIndex === -1) {
 
-                return (
-
-                    record.name === staffName &&
-
-                    record.date === today &&
-
-                    !record.clockOut
-
-                );
-
-            }
+        alert(
+            "There is no active shift for this staff member."
         );
 
-
-    if (!activeRecord) {
-
-        showMessage(
-
-            staffName +
-            " does not have an active shift today.",
-
-            "error"
-
-        );
+        checkStaffStatus();
 
         return;
-
     }
 
 
-    activeRecord.clockOut =
+    const now = new Date();
+
+
+    records[activeIndex].clockOut =
         getCurrentTime();
 
+    records[activeIndex].endTimestamp =
+        now.getTime();
 
-    activeRecord.endTimestamp =
-        Date.now();
+
+    saveRecords(records);
 
 
-    saveRecords(
-        records
+    const duration =
+        getRecordMinutes(records[activeIndex]);
+
+
+    alert(
+        `Shift ended at ${records[activeIndex].clockOut}.\n\nHours worked: ${formatMinutes(duration)}`
     );
 
 
-    showMessage(
+    checkStaffStatus();
 
-        "✓ " +
-        staffName +
-        " successfully clocked out at " +
-        activeRecord.clockOut,
+    renderToday();
 
-        "success"
-
-    );
-
-
-    document.getElementById(
-        "staffName"
-    ).value = "";
-
-
-    renderTodayRecords();
-
-    updateSummary();
-
-    updateManagerDashboard();
-
-    renderStaffHours();
+    renderSummary();
 
 }
 
 
-/* =========================
-   GET RECORD MINUTES
-========================= */
+// ================================
+// CALCULATE MINUTES
+// ================================
 
-function getRecordMinutes(
-    record
-) {
+function getRecordMinutes(record) {
 
     if (
-
         !record.startTimestamp ||
-
         !record.endTimestamp
-
     ) {
 
         return 0;
-
     }
 
 
     const difference =
-
         record.endTimestamp -
         record.startTimestamp;
 
 
     return Math.max(
-
         0,
-
-        Math.floor(
-            difference / 60000
-        )
-
+        Math.floor(difference / 60000)
     );
-
 }
 
 
-/* =========================
-   FORMAT MINUTES
-========================= */
+// ================================
+// FORMAT MINUTES
+// ================================
 
-function formatTotalMinutes(
-    totalMinutes
-) {
+function formatMinutes(minutes) {
 
     const hours =
-        Math.floor(
-            totalMinutes / 60
-        );
+        Math.floor(minutes / 60);
+
+    const mins =
+        minutes % 60;
 
 
-    const minutes =
-        totalMinutes % 60;
-
-
-    if (hours === 0) {
-
-        return minutes + "m";
-
-    }
-
-
-    return (
-
-        hours +
-        "h " +
-        minutes +
-        "m"
-
-    );
-
+    return `${hours}h ${mins}m`;
 }
 
 
-/* =========================
-   CALCULATE SHIFT DURATION
-========================= */
+// ================================
+// TODAY'S RECORDS
+// ================================
 
-function calculateDuration(
-    record
-) {
-
-    if (!record.endTimestamp) {
-
-        return "Working";
-
-    }
-
-
-    return formatTotalMinutes(
-        getRecordMinutes(record)
-    );
-
-}
-
-
-/* =========================
-   TODAY'S RECORDS
-========================= */
-
-function renderTodayRecords() {
-
-    const tbody =
-        document.getElementById(
-            "attendanceTableBody"
-        );
-
-
-    const emptyState =
-        document.getElementById(
-            "emptyState"
-        );
-
+function getTodayRecords() {
 
     const today =
-        getCurrentDate();
+        getLocalDate();
 
+    return getRecords().filter(function(record) {
+
+        return record.date === today;
+
+    });
+
+}
+
+
+// ================================
+// RENDER TODAY
+// ================================
+
+function renderToday() {
+
+    const tbody =
+        document.getElementById("todayTableBody");
 
     const records =
-        getRecords().filter(
-            function(record) {
+        getTodayRecords();
 
-                return record.date === today;
 
-            }
-        );
+    if (records.length === 0) {
+
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="5" class="empty">
+                    No shifts recorded today.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
 
 
     tbody.innerHTML = "";
 
 
-    if (records.length === 0) {
+    records.forEach(function(record) {
 
-        emptyState.style.display =
-            "block";
-
-        return;
-
-    }
+        const row =
+            document.createElement("tr");
 
 
-    emptyState.style.display =
-        "none";
+        const minutes =
+            getRecordMinutes(record);
 
 
-    records.sort(
-        function(a, b) {
+        let hours = "-";
 
-            return (
-                b.startTimestamp -
-                a.startTimestamp
-            );
+        if (record.clockOut) {
 
+            hours =
+                formatMinutes(minutes);
         }
-    );
 
 
-    records.forEach(
-        function(record) {
-
-            const row =
-                document.createElement(
-                    "tr"
-                );
+        let statusHTML;
 
 
-            let status;
+        if (record.clockOut) {
 
+            statusHTML =
+                `<span class="badge badge-complete">Completed</span>`;
 
-            if (record.clockOut) {
+        } else {
 
-                status =
-
-                    `<span class="status-badge status-completed">
-                        Completed
-                    </span>`;
-
-            }
-
-            else {
-
-                status =
-
-                    `<span class="status-badge status-working">
-                        Working
-                    </span>`;
-
-            }
-
-
-            row.innerHTML = `
-
-                <td class="staff-name-cell">
-
-                    ${escapeHTML(
-                        record.name
-                    )}
-
-                </td>
-
-
-                <td>
-
-                    ${formatTime(
-                        record.clockIn
-                    )}
-
-                </td>
-
-
-                <td>
-
-                    ${formatTime(
-                        record.clockOut
-                    )}
-
-                </td>
-
-
-                <td>
-
-                    ${calculateDuration(
-                        record
-                    )}
-
-                </td>
-
-
-                <td>
-
-                    ${status}
-
-                </td>
-
-            `;
-
-
-            tbody.appendChild(
-                row
-            );
-
+            statusHTML =
+                `<span class="badge badge-active">Working</span>`;
         }
-    );
+
+
+        row.innerHTML = `
+
+            <td><strong>${record.name}</strong></td>
+
+            <td>${record.clockIn}</td>
+
+            <td>${record.clockOut || "—"}</td>
+
+            <td>${hours}</td>
+
+            <td>${statusHTML}</td>
+
+        `;
+
+
+        tbody.appendChild(row);
+
+    });
 
 }
 
 
-/* =========================
-   SUMMARY
-========================= */
+// ================================
+// SUMMARY
+// ================================
 
-function updateSummary() {
-
-    const today =
-        getCurrentDate();
-
+function renderSummary() {
 
     const records =
-        getRecords().filter(
-            function(record) {
+        getTodayRecords();
 
-                return record.date === today;
 
-            }
+    const uniqueStaff =
+        new Set(
+            records.map(function(record) {
+                return record.name;
+            })
         );
-
-
-    const working =
-        records.filter(
-            function(record) {
-
-                return !record.clockOut;
-
-            }
-        ).length;
 
 
     const completed =
-        records.filter(
-            function(record) {
+        records.filter(function(record) {
 
-                return !!record.clockOut;
+            return record.clockOut;
 
-            }
-        ).length;
+        });
 
 
-    document.getElementById(
-        "workingCount"
-    ).textContent =
-        working;
+    let totalMinutes = 0;
 
 
-    document.getElementById(
-        "completedCount"
-    ).textContent =
-        completed;
+    completed.forEach(function(record) {
+
+        totalMinutes +=
+            getRecordMinutes(record);
+
+    });
+
+
+    document.getElementById("staffToday").textContent =
+        uniqueStaff.size;
+
+
+    document.getElementById("completedToday").textContent =
+        completed.length;
+
+
+    document.getElementById("hoursToday").textContent =
+        formatMinutes(totalMinutes);
 
 }
 
 
-/* =========================
-   STAFF HOURS
-========================= */
+// ================================
+// MANAGER LOGIN
+// ================================
 
-function renderStaffHours() {
+function openManagerLogin() {
 
-    const grid =
-        document.getElementById(
-            "staffHoursGrid"
-        );
+    document
+        .getElementById("managerLoginModal")
+        .classList.add("show");
 
 
-    if (!grid) {
+    document.getElementById("managerUsername").value = "";
 
-        return;
+    document.getElementById("managerPassword").value = "";
 
-    }
+    document.getElementById("managerLoginError").textContent = "";
 
 
-    const records =
-        getRecords();
+    setTimeout(function() {
 
+        document
+            .getElementById("managerUsername")
+            .focus();
 
-    grid.innerHTML = "";
-
-
-    STAFF_NAMES.forEach(
-        function(name) {
-
-
-            const staffRecords =
-                records.filter(
-                    function(record) {
-
-                        return (
-                            record.name === name
-                        );
-
-                    }
-                );
-
-
-            let totalMinutes = 0;
-
-
-            staffRecords.forEach(
-                function(record) {
-
-                    totalMinutes +=
-                        getRecordMinutes(
-                            record
-                        );
-
-                }
-            );
-
-
-            const activeShift =
-                staffRecords.some(
-                    function(record) {
-
-                        return !record.clockOut;
-
-                    }
-                );
-
-
-            const card =
-                document.createElement(
-                    "div"
-                );
-
-
-            card.className =
-                "staff-hours-card";
-
-
-            const initials =
-                name
-                    .substring(0, 2)
-                    .toUpperCase();
-
-
-            let statusText;
-
-
-            if (activeShift) {
-
-                statusText =
-                    "Currently working";
-
-            }
-
-            else if (
-                staffRecords.length > 0
-            ) {
-
-                statusText =
-
-                    staffRecords.length +
-                    " recorded shift" +
-                    (
-                        staffRecords.length > 1
-                            ? "s"
-                            : ""
-                    );
-
-            }
-
-            else {
-
-                statusText =
-                    "No completed shifts";
-
-            }
-
-
-            card.innerHTML = `
-
-                <div class="staff-hours-top">
-
-                    <div class="staff-avatar">
-
-                        ${escapeHTML(
-                            initials
-                        )}
-
-                    </div>
-
-
-                    <div class="staff-hours-name">
-
-                        ${escapeHTML(
-                            name
-                        )}
-
-                    </div>
-
-                </div>
-
-
-                <span class="staff-hours-label">
-
-                    Total hours worked
-
-                </span>
-
-
-                <div class="staff-hours-total">
-
-                    ${formatTotalMinutes(
-                        totalMinutes
-                    )}
-
-                </div>
-
-
-                <div class="staff-hours-status">
-
-                    ${statusText}
-
-                </div>
-
-            `;
-
-
-            grid.appendChild(
-                card
-            );
-
-        }
-    );
+    }, 100);
 
 }
 
 
-/* =========================
-   OPEN LOGIN
-========================= */
+function closeManagerLogin() {
 
-function openLoginModal() {
-
-    document.getElementById(
-        "loginModal"
-    ).classList.add(
-        "show"
-    );
-
-
-    document.getElementById(
-        "username"
-    ).focus();
+    document
+        .getElementById("managerLoginModal")
+        .classList.remove("show");
 
 }
 
 
-/* =========================
-   CLOSE LOGIN
-========================= */
+// ================================
+// MANAGER LOGIN CHECK
+// ================================
 
-function closeLoginModal() {
-
-    document.getElementById(
-        "loginModal"
-    ).classList.remove(
-        "show"
-    );
-
-
-    document.getElementById(
-        "loginMessage"
-    ).textContent = "";
-
-
-    document.getElementById(
-        "username"
-    ).value = "";
-
-
-    document.getElementById(
-        "password"
-    ).value = "";
-
-}
-
-
-/* =========================
-   MANAGER LOGIN
-========================= */
-
-function managerLogin() {
+function loginManager() {
 
     const username =
-        document.getElementById(
-            "username"
-        ).value.trim();
+        document
+            .getElementById("managerUsername")
+            .value
+            .trim();
 
 
     const password =
-        document.getElementById(
-            "password"
-        ).value;
+        document
+            .getElementById("managerPassword")
+            .value;
 
 
-    const loginMessage =
-        document.getElementById(
-            "loginMessage"
-        );
+    const error =
+        document.getElementById("managerLoginError");
 
 
     if (
-
-        username ===
-            MANAGER_USERNAME &&
-
-        password ===
-            MANAGER_PASSWORD
-
+        username === MANAGER_USERNAME &&
+        password === MANAGER_PASSWORD
     ) {
 
+        closeManagerLogin();
 
-        closeLoginModal();
+        openDashboard();
 
+    } else {
 
-        document.getElementById(
-            "dashboardModal"
-        ).classList.add(
-            "show"
-        );
-
-
-        updateManagerDashboard();
-
-        renderStaffHours();
-
-
-    }
-
-    else {
-
-        loginMessage.textContent =
+        error.textContent =
             "Incorrect username or password.";
 
     }
@@ -1159,61 +754,168 @@ function managerLogin() {
 }
 
 
-/* =========================
-   MANAGER DASHBOARD
-========================= */
+// ================================
+// OPEN DASHBOARD
+// ================================
 
-function updateManagerDashboard() {
+function openDashboard() {
+
+    renderDashboard();
+
+    document
+        .getElementById("dashboardModal")
+        .classList.add("show");
+
+}
+
+
+// ================================
+// CLOSE DASHBOARD
+// ================================
+
+function closeDashboard() {
+
+    document
+        .getElementById("dashboardModal")
+        .classList.remove("show");
+
+}
+
+
+// ================================
+// RENDER DASHBOARD
+// ================================
+
+function renderDashboard() {
 
     const records =
         getRecords();
 
 
+    let totalMinutes = 0;
+
+    let completedCount = 0;
+
+
+    records.forEach(function(record) {
+
+        if (record.clockOut) {
+
+            completedCount++;
+
+            totalMinutes +=
+                getRecordMinutes(record);
+
+        }
+
+    });
+
+
+    document.getElementById("dashStaffCount").textContent =
+        STAFF_NAMES.length;
+
+
+    document.getElementById("dashCompleted").textContent =
+        completedCount;
+
+
+    document.getElementById("dashTotalHours").textContent =
+        formatMinutes(totalMinutes);
+
+
+    renderStaffHours();
+
+    renderAllRecords();
+
+}
+
+
+// ================================
+// STAFF HOURS
+// ================================
+
+function renderStaffHours() {
+
+    const grid =
+        document.getElementById("staffHoursGrid");
+
+
+    grid.innerHTML = "";
+
+
+    const records =
+        getRecords();
+
+
+    STAFF_NAMES.forEach(function(name) {
+
+        const staffRecords =
+            records.filter(function(record) {
+
+                return (
+                    record.name === name &&
+                    record.clockOut
+                );
+
+            });
+
+
+        let totalMinutes = 0;
+
+
+        staffRecords.forEach(function(record) {
+
+            totalMinutes +=
+                getRecordMinutes(record);
+
+        });
+
+
+        const card =
+            document.createElement("div");
+
+
+        card.className =
+            "staff-hour-card";
+
+
+        card.innerHTML = `
+
+            <div class="name">
+                ${name}
+            </div>
+
+            <div class="hours">
+                ${formatMinutes(totalMinutes)}
+            </div>
+
+            <div class="shift-count">
+                ${staffRecords.length}
+                completed shift${staffRecords.length === 1 ? "" : "s"}
+            </div>
+
+        `;
+
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+// ================================
+// ALL RECORDS
+// ================================
+
+function renderAllRecords() {
+
     const tbody =
-        document.getElementById(
-            "managerTableBody"
-        );
+        document.getElementById("allRecordsBody");
 
 
-    tbody.innerHTML = "";
-
-
-    const working =
-        records.filter(
-            function(record) {
-
-                return !record.clockOut;
-
-            }
-        ).length;
-
-
-    const completed =
-        records.filter(
-            function(record) {
-
-                return !!record.clockOut;
-
-            }
-        ).length;
-
-
-    document.getElementById(
-        "totalRecords"
-    ).textContent =
-        records.length;
-
-
-    document.getElementById(
-        "dashboardWorking"
-    ).textContent =
-        working;
-
-
-    document.getElementById(
-        "dashboardCompleted"
-    ).textContent =
-        completed;
+    const records =
+        getRecords().slice().reverse();
 
 
     if (records.length === 0) {
@@ -1221,164 +923,73 @@ function updateManagerDashboard() {
         tbody.innerHTML = `
 
             <tr>
-
-                <td
-                    colspan="7"
-                    style="
-                        text-align:center;
-                        padding:35px;
-                        color:#888;
-                    "
-                >
-
-                    No attendance records available.
-
+                <td colspan="6" class="empty">
+                    No attendance records yet.
                 </td>
-
             </tr>
 
         `;
 
-
-        renderStaffHours();
-
         return;
-
     }
 
 
-    records.sort(
-        function(a, b) {
-
-            return (
-                b.startTimestamp -
-                a.startTimestamp
-            );
-
-        }
-    );
+    tbody.innerHTML = "";
 
 
-    records.forEach(
-        function(record) {
+    records.forEach(function(record) {
+
+        const row =
+            document.createElement("tr");
 
 
-            const row =
-                document.createElement(
-                    "tr"
+        let hours = "Working";
+
+
+        if (record.clockOut) {
+
+            hours =
+                formatMinutes(
+                    getRecordMinutes(record)
                 );
 
-
-            let status;
-
-
-            if (record.clockOut) {
-
-                status =
-
-                    `<span class="status-badge status-completed">
-                        Completed
-                    </span>`;
-
-            }
-
-            else {
-
-                status =
-
-                    `<span class="status-badge status-working">
-                        Working
-                    </span>`;
-
-            }
-
-
-            row.innerHTML = `
-
-                <td>
-
-                    ${formatDate(
-                        record.date
-                    )}
-
-                </td>
-
-
-                <td class="staff-name-cell">
-
-                    ${escapeHTML(
-                        record.name
-                    )}
-
-                </td>
-
-
-                <td>
-
-                    ${formatTime(
-                        record.clockIn
-                    )}
-
-                </td>
-
-
-                <td>
-
-                    ${formatTime(
-                        record.clockOut
-                    )}
-
-                </td>
-
-
-                <td>
-
-                    ${calculateDuration(
-                        record
-                    )}
-
-                </td>
-
-
-                <td>
-
-                    ${status}
-
-                </td>
-
-
-                <td>
-
-                    <button
-                        class="delete-btn"
-                        onclick="deleteRecord(${record.id})"
-                    >
-
-                        Delete
-
-                    </button>
-
-                </td>
-
-            `;
-
-
-            tbody.appendChild(
-                row
-            );
-
         }
-    );
 
 
-    renderStaffHours();
+        row.innerHTML = `
+
+            <td><strong>${record.name}</strong></td>
+
+            <td>${record.date}</td>
+
+            <td>${record.clockIn}</td>
+
+            <td>${record.clockOut || "—"}</td>
+
+            <td>${hours}</td>
+
+            <td>
+                <button
+                    class="delete-btn"
+                    onclick="deleteRecord(${record.id})"
+                >
+                    Delete
+                </button>
+            </td>
+
+        `;
+
+
+        tbody.appendChild(row);
+
+    });
 
 }
 
 
-/* =========================
-   DELETE RECORD
-========================= */
+// ================================
+// DELETE RECORD
+// ================================
 
 function deleteRecord(id) {
 
@@ -1389,233 +1000,153 @@ function deleteRecord(id) {
 
 
     if (!confirmed) {
-
         return;
-
     }
 
 
-    let records =
-        getRecords();
+    const records =
+        getRecords().filter(function(record) {
+
+            return record.id !== id;
+
+        });
 
 
-    records =
-        records.filter(
-            function(record) {
-
-                return record.id !== id;
-
-            }
-        );
+    saveRecords(records);
 
 
-    saveRecords(
-        records
-    );
+    renderDashboard();
 
+    renderToday();
 
-    renderTodayRecords();
+    renderSummary();
 
-    updateSummary();
-
-    updateManagerDashboard();
-
-    renderStaffHours();
+    checkStaffStatus();
 
 }
 
 
-/* =========================
-   CLEAR ALL
-========================= */
+// ================================
+// CLEAR ALL
+// ================================
 
 function clearAllRecords() {
 
+    const records =
+        getRecords();
+
+
+    if (records.length === 0) {
+
+        alert("There are no attendance records to delete.");
+
+        return;
+    }
+
+
     const confirmed =
         confirm(
-            "Are you sure you want to delete ALL attendance records?"
+            "WARNING: This will permanently delete ALL attendance records from this browser.\n\nContinue?"
         );
 
 
     if (!confirmed) {
-
         return;
-
     }
 
 
-    localStorage.removeItem(
-        STORAGE_KEY
-    );
+    localStorage.removeItem(STORAGE_KEY);
 
 
-    renderTodayRecords();
+    renderDashboard();
 
-    updateSummary();
+    renderToday();
 
-    updateManagerDashboard();
+    renderSummary();
 
-    renderStaffHours();
+    checkStaffStatus();
 
 
-    showMessage(
-        "All attendance records have been cleared.",
-        "success"
-    );
+    alert("All attendance records have been cleared.");
 
 }
 
 
-/* =========================
-   LOGOUT
-========================= */
+// ================================
+// ENTER KEY LOGIN
+// ================================
 
-function logoutManager() {
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
 
-    document.getElementById(
-        "dashboardModal"
-    ).classList.remove(
-        "show"
-    );
+        updateDateTime();
 
-}
+        renderToday();
+
+        renderSummary();
+
+        checkStaffStatus();
 
 
-/* =========================
-   ESCAPE HTML
-========================= */
-
-function escapeHTML(text) {
-
-    const div =
-        document.createElement(
-            "div"
+        setInterval(
+            updateDateTime,
+            1000
         );
 
 
-    div.textContent =
-        text;
+        document
+            .getElementById("staffPin")
+            .addEventListener(
+                "keydown",
+                function(event) {
 
+                    if (event.key === "Enter") {
 
-    return div.innerHTML;
+                        confirmStaffLogin();
 
-}
+                    }
 
-
-/* =========================
-   CLOSE MODAL OUTSIDE
-========================= */
-
-window.addEventListener(
-    "click",
-    function(event) {
-
-
-        const loginModal =
-            document.getElementById(
-                "loginModal"
+                }
             );
 
 
-        const dashboardModal =
-            document.getElementById(
-                "dashboardModal"
+        document
+            .getElementById("managerPassword")
+            .addEventListener(
+                "keydown",
+                function(event) {
+
+                    if (event.key === "Enter") {
+
+                        loginManager();
+
+                    }
+
+                }
             );
-
-
-        if (
-            event.target ===
-            loginModal
-        ) {
-
-            closeLoginModal();
-
-        }
-
-
-        if (
-            event.target ===
-            dashboardModal
-        ) {
-
-            logoutManager();
-
-        }
 
     }
 );
 
 
-/* =========================
-   KEYBOARD
-========================= */
-
-document.addEventListener(
-    "keydown",
-    function(event) {
-
-
-        if (event.key === "Enter") {
-
-
-            const loginModal =
-                document.getElementById(
-                    "loginModal"
-                );
-
-
-            if (
-                loginModal.classList.contains(
-                    "show"
-                )
-            ) {
-
-                managerLogin();
-
-            }
-
-        }
-
-
-        if (event.key === "Escape") {
-
-            closeLoginModal();
-
-            logoutManager();
-
-        }
-
-    }
-);
-
-
-/* =========================
-   INITIAL LOAD
-========================= */
-
-renderTodayRecords();
-
-updateSummary();
-
-updateManagerDashboard();
-
-renderStaffHours();
-
-
-/* =========================
-   AUTO REFRESH
-========================= */
+// ================================
+// AUTO REFRESH
+// ================================
 
 setInterval(
     function() {
 
-        renderTodayRecords();
+        renderToday();
 
-        updateSummary();
+        renderSummary();
 
-        updateManagerDashboard();
+        const staffName =
+            document.getElementById("staffName").value;
 
-        renderStaffHours();
+        if (staffName) {
+            checkStaffStatus();
+        }
 
     },
     30000
