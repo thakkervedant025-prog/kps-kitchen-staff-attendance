@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}KP's Kitchen | Staff Attendance{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    {% if session.get("manager_logged_in") %}
+    <header class="topbar">
+        <div>
+            <div class="brand-wrap"><img class="brand-logo" src="{{ url_for('static', filename='kps-kitchen-logo.png') }}" alt="KP's Kitchen logo"><div><div class="brand">KP's Kitchen</div><div class="brand-sub">Staff Attendance & Shift Management</div></div></div>
+            
+        </div>
+        <nav>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('employees') }}">Employees</a>
+            <a href="{{ url_for('history') }}">History</a>
+            <a class="logout-link" href="{{ url_for('manager_logout') }}">Manager Logout</a>
+        </nav>
+    </header>
+    {% endif %}
+
+    <main class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

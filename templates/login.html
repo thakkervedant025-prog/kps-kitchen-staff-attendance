@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Manager Login{% endblock %}
+{% block content %}
+<div class="login-page">
+    <div class="login-card">
+        <img class="login-logo" src="{{ url_for('static', filename='kps-kitchen-logo.png') }}" alt="KP's Kitchen logo">
+        <h1>KP's Kitchen Manager Login</h1>
+        <p>Sign in to manage KP's Kitchen staff shifts and attendance.</p>
+
+        <form method="post">
+            <label>Username</label>
+            <input name="username" placeholder="manager" required>
+
+            <label>Password</label>
+            <input type="password" name="password" placeholder="manager123" required>
+
+            <button class="primary full" type="submit">Sign in</button>
+        </form>
+
+        <div class="demo-note">
+            <strong>Demo login</strong><br>
+            Username: manager<br>
+            Password: manager123
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="page-heading">
+    <div>
+        <h1>KP's Kitchen — Today's Dashboard</h1>
+        <p>{{ today }} · Current time {{ now }}</p>
+    </div>
+    <a class="primary button-link" href="{{ url_for('employees') }}">+ Add Employee</a>
+</div>
+
+<div class="stats">
+    <div class="stat-card">
+        <span class="stat-icon">👥</span>
+        <div><small>Currently Working</small><strong>{{ working }}</strong></div>
+    </div>
+    <div class="stat-card">
+        <span class="stat-icon">✓</span>
+        <div><small>Completed Shifts</small><strong>{{ completed }}</strong></div>
+    </div>
+    <div class="stat-card">
+        <span class="stat-icon">🕔</span>
+        <div><small>Delivery Start</small><strong>5:00 PM</strong></div>
+    </div>
+</div>
+
+<section class="panel">
+    <div class="panel-title">
+        <div>
+            <h2>Staff Attendance</h2>
+            <p>Manager-controlled login and logout</p>
+        </div>
+    </div>
+
+    <div class="table-wrap">
+    <table>
+        <thead>
+            <tr>
+                <th>Employee</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Login</th>
+                <th>Scheduled Logout</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for e in employees %}
+            <tr>
+                <td><strong>{{ e.name }}</strong></td>
+                <td><span class="type-pill {{ e.employee_type|lower }}">{{ e.employee_type }}</span></td>
+                <td>
+                    {% if e.status == 'Working' %}
+                        <span class="status working">● Working</span>
+                    {% elif e.status == 'Completed' %}
+                        <span class="status completed">● Completed</span>
+                    {% else %}
+                        <span class="status offline">● Not Logged In</span>
+                    {% endif %}
+                </td>
+                <td>{{ e.login_time[11:16] if e.login_time else '—' }}</td>
+                <td>{{ e.scheduled_logout[11:16] if e.scheduled_logout else '—' }}</td>
+                <td>
+                    {% if e.status == 'Working' %}
+                    <form method="post" action="{{ url_for('staff_logout', attendance_id=e.attendance_id) }}">
+                        <button class="danger small-btn">Logout</button>
+                    </form>
+                    {% else %}
+                    <form method="post" action="{{ url_for('staff_login') }}" class="inline-form">
+                        <input type="hidden" name="employee_id" value="{{ e.id }}">
+                        <input type="time" name="finish_time" required
+                               {% if e.employee_type == 'Delivery' %}value="22:00"{% endif %}>
+                        <button class="primary small-btn">Login</button>
+                    </form>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr><td colspan="6" class="empty">No employees found.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</section>
+
+<div class="info-grid">
+    <div class="info-card">
+        <h3>Kitchen staff</h3>
+        <p>Login time is recorded when the manager starts the shift. Enter the expected finish time so automatic logout can occur.</p>
+    </div>
+    <div class="info-card">
+        <h3>Delivery staff</h3>
+        <p>Delivery shifts start at <strong>5:00 PM</strong>. Enter the driver's finish time. The system closes the shift automatically if nobody logs them out.</p>
+    </div>
+</div>
+{% endblock %}

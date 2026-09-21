@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Employees{% endblock %}
+{% block content %}
+<div class="page-heading">
+    <div>
+        <h1>KP's Kitchen Employees</h1>
+        <p>Add and manage the staff list.</p>
+    </div>
+</div>
+
+<div class="two-col">
+    <section class="panel">
+        <h2>Add Employee</h2>
+        <form method="post" class="employee-form">
+            <label>Employee name</label>
+            <input name="name" placeholder="e.g. Emma Wilson" required>
+
+            <label>Employee type</label>
+            <select name="employee_type" required>
+                <option value="">Select type</option>
+                <option value="Kitchen">Kitchen</option>
+                <option value="Delivery">Delivery</option>
+            </select>
+
+            <button class="primary" type="submit">Add Employee</button>
+        </form>
+    </section>
+
+    <section class="panel">
+        <h2>Current Staff</h2>
+        <div class="staff-list">
+        {% for e in employees %}
+            <div class="staff-row">
+                <div>
+                    <strong>{{ e.name }}</strong>
+                    <span class="type-pill {{ e.employee_type|lower }}">{{ e.employee_type }}</span>
+                </div>
+                <span class="staff-active">Active</span>
+            </div>
+        {% endfor %}
+        </div>
+    </section>
+</div>
+{% endblock %}
