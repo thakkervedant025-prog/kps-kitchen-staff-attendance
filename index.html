@@ -1,522 +1,605 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>K.P.'s Kitchen | Staff Attendance</title>
 
-
-    <!-- Google Font -->
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
-
-
-    <!-- Website CSS -->
-
     <link rel="stylesheet" href="style.css">
-
 </head>
-
 
 <body>
 
+<!-- ================= HEADER ================= -->
 
-    <!-- =========================
-         HEADER
-    ========================== -->
+<header class="top-header">
 
-    <header class="top-header">
+    <div class="brand-area">
 
-        <div class="brand">
+        <div class="restaurant-logo">
+            <div class="logo-chef">♨</div>
+        </div>
 
-            <div class="brand-logo">
-                KP
+        <div class="brand-text">
+            <h1>K.P.'s Kitchen</h1>
+            <p>Staff Attendance System</p>
+        </div>
+
+    </div>
+
+
+    <div class="header-right">
+
+        <div class="live-clock">
+
+            <div class="clock-icon">
+                ◷
             </div>
 
-            <div class="brand-text">
+            <div>
+                <div id="headerDate">
+                    Monday, 21 September 2026
+                </div>
 
-                <h1>
-                    K.P.'s Kitchen
-                </h1>
-
-                <p>
-                    Staff Attendance
-                </p>
-
+                <strong id="headerTime">
+                    07:04:37 pm
+                </strong>
             </div>
 
         </div>
 
 
+        <div class="header-divider"></div>
+
+
         <button
-            class="manager-btn"
-            onclick="openLoginModal()"
+            class="manager-login-button"
+            onclick="openManagerLogin()"
         >
-
-            <span>⚙</span>
-
-            Manager
-
+            <span>♟</span>
+            Manager Login
         </button>
 
-    </header>
+    </div>
+
+</header>
 
 
+<!-- ================= MAIN LAYOUT ================= -->
 
-    <!-- =========================
-         MAIN
-    ========================== -->
-
-    <main class="container">
+<div class="page-layout">
 
 
-        <!-- HERO -->
+    <!-- ================= SIDEBAR ================= -->
 
-        <section class="hero-card">
+    <aside class="sidebar">
+
+        <nav class="sidebar-navigation">
+
+            <button
+                class="sidebar-link active"
+                onclick="showHome()"
+            >
+                <span class="sidebar-icon">⌂</span>
+                <span>Home</span>
+            </button>
 
 
-            <div class="hero-left">
+            <button
+                class="sidebar-link"
+                onclick="scrollToAttendance()"
+            >
+                <span class="sidebar-icon">▣</span>
+                <span>Today's Shifts</span>
+            </button>
 
-                <p class="eyebrow">
+
+            <button
+                class="sidebar-link"
+                onclick="openManagerLogin()"
+            >
+                <span class="sidebar-icon">▥</span>
+                <span>Manager Dashboard</span>
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="sidebar-chef">
+                ♨
+            </div>
+
+            <div class="sidebar-good-food">
+                Good Food
+            </div>
+
+            <div class="sidebar-great-team">
+                Great Team
+            </div>
+
+            <strong>
+                K.P.'s Kitchen
+            </strong>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+
+        <!-- ================= WELCOME BANNER ================= -->
+
+        <section class="welcome-banner">
+
+            <div class="welcome-content">
+
+                <span class="welcome-label">
                     WELCOME TO
-                </p>
-
+                </span>
 
                 <h2>
                     K.P.'s Kitchen
                 </h2>
 
-
-                <p class="hero-description">
-
-                    Staff attendance made simple.
-                    Select your name and record
-                    your shift.
-
+                <p>
+                    Staff attendance made simple. Select your name
+                    <br>
+                    and record your shift.
                 </p>
 
-            </div>
-
-
-
-            <div class="live-clock">
-
-                <p id="currentDate">
-                    Loading date...
-                </p>
-
-
-                <div id="currentTime">
-                    00:00:00
-                </div>
-
-
-                <span>
-                    Current local time
-                </span>
+                <div class="gold-line"></div>
 
             </div>
 
 
-        </section>
+            <div class="welcome-background">
 
+                <div class="kitchen-overlay"></div>
 
-
-        <!-- =========================
-             ATTENDANCE
-        ========================== -->
-
-        <section class="attendance-card">
-
-
-            <div class="section-heading">
-
-                <div>
-
-                    <span class="section-label">
-                        STAFF PORTAL
-                    </span>
-
-
-                    <h2>
-                        Record Your Shift
-                    </h2>
-
-                </div>
-
-
-                <div class="status-indicator">
-
-                    <span class="status-dot"></span>
-
-                    System Online
-
-                </div>
-
-            </div>
-
-
-
-            <!-- STAFF -->
-
-            <div class="staff-selection">
-
-                <label for="staffName">
-                    Select Staff Member
-                </label>
-
-
-                <div class="select-wrapper">
-
-                    <span class="select-icon">
-                        👤
-                    </span>
-
-
-                    <select
-                        id="staffName"
-                        onchange="checkStaffStatus()"
-                    >
-
-                        <option value="">
-                            Choose your name
-                        </option>
-
-                        <option value="Vedant">
-                            Vedant
-                        </option>
-
-                        <option value="Jinal">
-                            Jinal
-                        </option>
-
-                        <option value="Divya">
-                            Divya
-                        </option>
-
-                        <option value="Mittal">
-                            Mittal
-                        </option>
-
-                        <option value="Trupti">
-                            Trupti
-                        </option>
-
-                        <option value="Harsh">
-                            Harsh
-                        </option>
-
-                        <option value="JK">
-                            JK
-                        </option>
-
-                        <option value="Kush">
-                            Kush
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div
-                    id="staffStatus"
-                    class="staff-status hidden"
-                ></div>
-
-            </div>
-
-
-
-            <!-- BUTTONS -->
-
-            <div class="action-buttons">
-
-
-                <button
-                    class="action-btn clock-in"
-                    onclick="clockIn()"
-                >
-
-                    <div class="button-icon">
-                        ▶
-                    </div>
-
-
-                    <div>
-
-                        <strong>
-                            Clock In
-                        </strong>
-
-                        <span>
-                            Start your shift
-                        </span>
-
-                    </div>
-
-                </button>
-
-
-
-                <button
-                    class="action-btn clock-out"
-                    onclick="clockOut()"
-                >
-
-                    <div class="button-icon">
-                        ■
-                    </div>
-
-
-                    <div>
-
-                        <strong>
-                            Clock Out
-                        </strong>
-
-                        <span>
-                            End your shift
-                        </span>
-
-                    </div>
-
-                </button>
-
-
-            </div>
-
-
-
-            <!-- MESSAGE -->
-
-            <div
-                id="message"
-                class="message"
-            ></div>
-
-
-        </section>
-
-
-
-        <!-- =========================
-             SUMMARY
-        ========================== -->
-
-        <section class="summary-grid">
-
-
-            <div class="summary-card">
-
-                <div class="summary-icon">
-                    👥
-                </div>
-
-
-                <div>
+                <div class="good-food-message">
 
                     <span>
-                        Staff Members
+                        Good Food
                     </span>
 
                     <strong>
-                        8
+                        Great Team
                     </strong>
+
+                    <div class="gold-curve"></div>
 
                 </div>
 
             </div>
-
-
-
-            <div class="summary-card">
-
-                <div class="summary-icon green">
-                    ✓
-                </div>
-
-
-                <div>
-
-                    <span>
-                        Currently Working
-                    </span>
-
-                    <strong id="workingCount">
-                        0
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="summary-card">
-
-                <div class="summary-icon blue">
-                    ◷
-                </div>
-
-
-                <div>
-
-                    <span>
-                        Completed Today
-                    </span>
-
-                    <strong id="completedCount">
-                        0
-                    </strong>
-
-                </div>
-
-            </div>
-
 
         </section>
 
 
 
-        <!-- =========================
-             TODAY
-        ========================== -->
+        <!-- ================= STAFF PORTAL ================= -->
 
-        <section class="records-card">
+        <section class="staff-portal">
 
 
-            <div class="records-header">
+            <div class="portal-main">
 
 
-                <div>
+                <div class="portal-heading">
 
-                    <span class="section-label">
-                        ATTENDANCE
-                    </span>
+                    <div>
 
+                        <div class="section-label">
+                            ♟ &nbsp; STAFF PORTAL
+                        </div>
+
+                        <h2>
+                            Record Your Shift
+                        </h2>
+
+                        <p>
+                            Select your staff member and click the appropriate button.
+                        </p>
+
+                    </div>
+
+
+                    <div class="system-online">
+
+                        <span class="online-dot"></span>
+
+                        System Online
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="shift-controls">
+
+
+                    <!-- STAFF SELECT -->
+
+                    <div class="staff-selector">
+
+                        <label>
+                            ♟ &nbsp; Select Staff Member
+                        </label>
+
+
+                        <select
+                            id="staffName"
+                            onchange="checkStaffStatus()"
+                        >
+
+                            <option value="">
+                                Choose your name
+                            </option>
+
+                            <option value="Vedant">
+                                Vedant
+                            </option>
+
+                            <option value="Jinal">
+                                Jinal
+                            </option>
+
+                            <option value="Divya">
+                                Divya
+                            </option>
+
+                            <option value="Mittal">
+                                Mittal
+                            </option>
+
+                            <option value="Trupti">
+                                Trupti
+                            </option>
+
+                            <option value="Harsh">
+                                Harsh
+                            </option>
+
+                            <option value="JK">
+                                JK
+                            </option>
+
+                            <option value="Kush">
+                                Kush
+                            </option>
+
+                        </select>
+
+
+                        <div
+                            id="staffStatus"
+                            class="staff-status"
+                        >
+                            ● &nbsp; Please select your name.
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- START SHIFT -->
+
+                    <button
+                        id="startShiftBtn"
+                        class="shift-button start-shift"
+                        onclick="startShift()"
+                    >
+
+                        <div class="shift-button-icon">
+                            ▶
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Start Shift
+                            </strong>
+
+                            <small>
+                                Clock-in and begin your shift
+                            </small>
+
+                        </div>
+
+                    </button>
+
+
+
+                    <!-- END SHIFT -->
+
+                    <button
+                        id="endShiftBtn"
+                        class="shift-button end-shift"
+                        onclick="endShift()"
+                        disabled
+                    >
+
+                        <div class="shift-button-icon">
+                            ■
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                End Shift
+                            </strong>
+
+                            <small>
+                                Clock-out and end your shift
+                            </small>
+
+                        </div>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================= CURRENT TIME ================= -->
+
+            <div class="time-panel">
+
+
+                <div class="time-information">
+
+                    <div class="time-icon">
+                        ◷
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Current Time
+                        </span>
+
+                        <strong id="panelTime">
+                            07:04:37 pm
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="time-divider"></div>
+
+
+                <div class="time-information">
+
+                    <div class="time-icon">
+                        ▣
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Current Date
+                        </span>
+
+                        <strong
+                            id="panelDate"
+                            class="date-display"
+                        >
+                            Monday, 21 September 2026
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= ATTENDANCE + SUMMARY ================= -->
+
+        <section
+            class="attendance-layout"
+            id="attendanceSection"
+        >
+
+
+            <!-- ================= TODAY'S ATTENDANCE ================= -->
+
+            <div class="attendance-card">
+
+                <div class="card-heading">
+
+                    <div>
+
+                        <div class="section-label">
+                            ▣ &nbsp; TODAY'S SHIFTS
+                        </div>
+
+                        <h2>
+                            Today's Attendance
+                        </h2>
+
+                        <p>
+                            View all staff shifts for today.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="attendance-table-wrapper">
+
+                    <table class="attendance-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    STAFF MEMBER
+                                </th>
+
+                                <th>
+                                    CLOCK IN
+                                </th>
+
+                                <th>
+                                    CLOCK OUT
+                                </th>
+
+                                <th>
+                                    HOURS
+                                </th>
+
+                                <th>
+                                    STATUS
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="todayTableBody">
+
+                            <tr>
+
+                                <td
+                                    colspan="5"
+                                    class="empty-attendance"
+                                >
+
+                                    <div class="empty-icon">
+                                        ▤
+                                    </div>
+
+                                    <span>
+                                        No shifts recorded today.
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================= SUMMARY ================= -->
+
+            <div class="summary-card">
+
+                <div class="summary-heading">
+
+                    <div class="section-label">
+                        ▥ &nbsp; TODAY'S SUMMARY
+                    </div>
 
                     <h2>
-                        Today's Shifts
+                        Overview
                     </h2>
 
                 </div>
 
 
-                <span
-                    id="todayDateBadge"
-                    class="date-badge"
-                ></span>
+                <div class="summary-item staff-summary">
 
-
-            </div>
-
-
-
-            <div class="table-container">
-
-
-                <table>
-
-                    <thead>
-
-                        <tr>
-
-                            <th>
-                                Staff Member
-                            </th>
-
-                            <th>
-                                Shift Start
-                            </th>
-
-                            <th>
-                                Shift End
-                            </th>
-
-                            <th>
-                                Duration
-                            </th>
-
-                            <th>
-                                Status
-                            </th>
-
-                        </tr>
-
-                    </thead>
-
-
-                    <tbody
-                        id="attendanceTableBody"
-                    ></tbody>
-
-
-                </table>
-
-
-
-                <div
-                    id="emptyState"
-                    class="empty-state"
-                >
-
-                    <div class="empty-icon">
-                        📋
+                    <div class="summary-icon">
+                        ♟
                     </div>
 
+                    <div>
 
-                    <h3>
-                        No attendance recorded yet
-                    </h3>
+                        <span>
+                            Staff Today
+                        </span>
 
+                        <strong id="staffToday">
+                            0
+                        </strong>
 
-                    <p>
-                        Staff attendance for today
-                        will appear here.
-                    </p>
+                    </div>
 
                 </div>
 
 
-            </div>
+                <div class="summary-item completed-summary">
 
+                    <div class="summary-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Completed Shifts
+                        </span>
+
+                        <strong id="completedToday">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-item hours-summary">
+
+                    <div class="summary-icon">
+                        ◷
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Total Hours
+                        </span>
+
+                        <strong id="hoursToday">
+                            0h 0m
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </section>
 
 
 
-        <!-- =========================
-             INFORMATION
-        ========================== -->
+        <!-- ================= INFORMATION CARDS ================= -->
 
-        <section class="info-section">
+        <section class="information-cards">
 
 
-            <div class="info-card">
+            <div class="information-card">
 
-                <div class="info-card-icon">
-                    🕐
+                <div class="information-icon">
+                    ◷
                 </div>
-
 
                 <div>
 
@@ -524,15 +607,9 @@
                         Automatic Time
                     </h3>
 
-
                     <p>
-
-                        Clock-in and clock-out
-                        times are automatically
-                        taken from the restaurant
-                        computer's current date
-                        and time.
-
+                        Clock-in and clock-out times are automatically
+                        taken from the current computer time.
                     </p>
 
                 </div>
@@ -541,55 +618,44 @@
 
 
 
-            <div class="info-card">
+            <div class="information-card">
 
-                <div class="info-card-icon">
-                    📱
-                </div>
-
-
-                <div>
-
-                    <h3>
-                        Easy to Use
-                    </h3>
-
-
-                    <p>
-
-                        Select your name and
-                        press Clock In or
-                        Clock Out. No manual
-                        time entry is required.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="info-card">
-
-                <div class="info-card-icon">
+                <div class="information-icon">
                     🔒
                 </div>
 
+                <div>
+
+                    <h3>
+                        Staff Login
+                    </h3>
+
+                    <p>
+                        Staff select their name and enter their
+                        personal PIN before starting a shift.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="information-card">
+
+                <div class="information-icon">
+                    ♟
+                </div>
 
                 <div>
 
                     <h3>
-                        Manager Access
+                        Manager Dashboard
                     </h3>
 
-
                     <p>
-
-                        Managers can view
-                        attendance records
-                        and total staff hours.
-
+                        Managers can view staff hours, shifts and
+                        attendance records.
                     </p>
 
                 </div>
@@ -602,353 +668,240 @@
 
     </main>
 
+</div>
 
 
-    <!-- =========================
-         FOOTER
-    ========================== -->
 
-    <footer>
+<!-- ===================================================== -->
+<!-- STAFF LOGIN MODAL -->
+<!-- ===================================================== -->
+
+<div
+    id="staffLoginModal"
+    class="modal"
+>
+
+    <div class="login-box">
 
 
-        <div class="footer-brand">
+        <button
+            class="modal-close"
+            onclick="closeStaffLogin()"
+        >
+            ×
+        </button>
 
-            <div class="small-logo">
-                KP
-            </div>
 
-
-            <strong>
-                K.P.'s Kitchen
-            </strong>
-
+        <div class="login-logo">
+            KP
         </div>
 
 
-        <p>
-            Staff Attendance Management System
+        <div class="section-label">
+            STAFF LOGIN
+        </div>
+
+
+        <h2>
+            Start Your Shift
+        </h2>
+
+
+        <p id="staffLoginMessage">
+            Enter your PIN to continue.
         </p>
 
 
-    </footer>
+        <label>
+            Staff PIN
+        </label>
 
 
-
-    <!-- =========================
-         MANAGER LOGIN
-    ========================== -->
-
-    <div
-        id="loginModal"
-        class="modal"
-    >
+        <input
+            type="password"
+            id="staffPin"
+            placeholder="Enter your PIN"
+            maxlength="10"
+        >
 
 
-        <div class="modal-box">
+        <div
+            id="staffLoginError"
+            class="login-error"
+        ></div>
 
 
-            <button
-                class="close-btn"
-                onclick="closeLoginModal()"
-            >
-                ×
-            </button>
-
-
-            <div class="login-icon">
-                🔐
-            </div>
-
-
-            <span class="section-label">
-                MANAGER ACCESS
-            </span>
-
-
-            <h2>
-                Manager Login
-            </h2>
-
-
-            <p class="modal-description">
-
-                Enter your manager credentials
-                to access the attendance dashboard.
-
-            </p>
-
-
-
-            <label for="username">
-                Username
-            </label>
-
-
-            <input
-                type="text"
-                id="username"
-                placeholder="Enter username"
-            >
-
-
-
-            <label for="password">
-                Password
-            </label>
-
-
-            <input
-                type="password"
-                id="password"
-                placeholder="Enter password"
-            >
-
-
-
-            <div
-                id="loginMessage"
-                class="login-message"
-            ></div>
-
-
-
-            <button
-                class="login-submit"
-                onclick="managerLogin()"
-            >
-
-                Login to Dashboard
-
-            </button>
-
-
-        </div>
-
+        <button
+            class="login-submit"
+            onclick="confirmStaffLogin()"
+        >
+            Start Shift
+        </button>
 
     </div>
 
+</div>
 
 
-    <!-- =========================
-         MANAGER DASHBOARD
-    ========================== -->
 
-    <div
-        id="dashboardModal"
-        class="dashboard-modal"
-    >
+<!-- ===================================================== -->
+<!-- MANAGER LOGIN MODAL -->
+<!-- ===================================================== -->
 
+<div
+    id="managerLoginModal"
+    class="modal"
+>
 
-        <div class="dashboard-box">
-
-
-            <div class="dashboard-header">
+    <div class="login-box">
 
 
-                <div>
-
-                    <span class="section-label">
-                        MANAGER PORTAL
-                    </span>
-
-
-                    <h2>
-                        Attendance Dashboard
-                    </h2>
+        <button
+            class="modal-close"
+            onclick="closeManagerLogin()"
+        >
+            ×
+        </button>
 
 
-                    <p>
-                        K.P.'s Kitchen staff management
-                    </p>
-
-                </div>
+        <div class="login-logo">
+            KP
+        </div>
 
 
-                <button
-                    class="dashboard-close"
-                    onclick="logoutManager()"
-                >
-                    ×
-                </button>
+        <div class="section-label">
+            MANAGEMENT
+        </div>
 
+
+        <h2>
+            Manager Login
+        </h2>
+
+
+        <p>
+            Sign in to view staff attendance and total hours.
+        </p>
+
+
+        <label>
+            Username
+        </label>
+
+
+        <input
+            type="text"
+            id="managerUsername"
+            placeholder="Enter username"
+        >
+
+
+        <label>
+            Password
+        </label>
+
+
+        <input
+            type="password"
+            id="managerPassword"
+            placeholder="Enter password"
+        >
+
+
+        <div
+            id="managerLoginError"
+            class="login-error"
+        ></div>
+
+
+        <button
+            class="login-submit"
+            onclick="loginManager()"
+        >
+            Login to Dashboard
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- ===================================================== -->
+<!-- MANAGER DASHBOARD -->
+<!-- ===================================================== -->
+
+<div
+    id="dashboardModal"
+    class="modal dashboard-modal"
+>
+
+    <div class="dashboard-box">
+
+
+        <button
+            class="modal-close"
+            onclick="closeDashboard()"
+        >
+            ×
+        </button>
+
+
+        <div class="section-label">
+            MANAGEMENT
+        </div>
+
+
+        <h2>
+            Attendance Dashboard
+        </h2>
+
+
+        <p class="dashboard-description">
+            K.P.'s Kitchen staff overview
+        </p>
+
+
+        <!-- DASHBOARD STATS -->
+
+        <div class="dashboard-stats">
+
+
+            <div class="dashboard-stat">
+
+                <span>
+                    Total Staff
+                </span>
+
+                <strong id="dashStaffCount">
+                    8
+                </strong>
 
             </div>
 
 
+            <div class="dashboard-stat">
 
-            <!-- STATS -->
+                <span>
+                    Completed Shifts
+                </span>
 
-            <div class="dashboard-stats">
-
-
-                <div class="dashboard-stat">
-
-                    <span>
-                        Total Records
-                    </span>
-
-                    <strong id="totalRecords">
-                        0
-                    </strong>
-
-                </div>
-
-
-
-                <div class="dashboard-stat">
-
-                    <span>
-                        Currently Working
-                    </span>
-
-                    <strong id="dashboardWorking">
-                        0
-                    </strong>
-
-                </div>
-
-
-
-                <div class="dashboard-stat">
-
-                    <span>
-                        Completed Shifts
-                    </span>
-
-                    <strong id="dashboardCompleted">
-                        0
-                    </strong>
-
-                </div>
-
+                <strong id="dashCompleted">
+                    0
+                </strong>
 
             </div>
 
 
+            <div class="dashboard-stat">
 
-            <!-- =========================
-                 STAFF HOURS
-            ========================== -->
+                <span>
+                    Total Hours
+                </span>
 
-            <div class="hours-section">
-
-
-                <div class="hours-section-header">
-
-                    <div>
-
-                        <span class="section-label">
-                            STAFF HOURS
-                        </span>
-
-
-                        <h3>
-                            Total Hours Worked
-                        </h3>
-
-                    </div>
-
-
-                    <span class="hours-period">
-                        All recorded shifts
-                    </span>
-
-                </div>
-
-
-
-                <div
-                    id="staffHoursGrid"
-                    class="staff-hours-grid"
-                ></div>
-
-
-            </div>
-
-
-
-            <!-- =========================
-                 ALL RECORDS
-            ========================== -->
-
-            <div class="dashboard-table-container">
-
-
-                <table>
-
-                    <thead>
-
-                        <tr>
-
-                            <th>
-                                Date
-                            </th>
-
-                            <th>
-                                Staff
-                            </th>
-
-                            <th>
-                                Clock In
-                            </th>
-
-                            <th>
-                                Clock Out
-                            </th>
-
-                            <th>
-                                Duration
-                            </th>
-
-                            <th>
-                                Status
-                            </th>
-
-                            <th>
-                                Action
-                            </th>
-
-                        </tr>
-
-                    </thead>
-
-
-                    <tbody
-                        id="managerTableBody"
-                    ></tbody>
-
-
-                </table>
-
-
-            </div>
-
-
-
-            <!-- DASHBOARD FOOTER -->
-
-            <div class="dashboard-footer">
-
-
-                <button
-                    class="danger-btn"
-                    onclick="clearAllRecords()"
-                >
-
-                    Clear All Records
-
-                </button>
-
-
-                <button
-                    class="logout-btn"
-                    onclick="logoutManager()"
-                >
-
-                    Logout
-
-                </button>
-
+                <strong id="dashTotalHours">
+                    0h 0m
+                </strong>
 
             </div>
 
@@ -956,15 +909,98 @@
         </div>
 
 
+
+        <!-- STAFF HOURS -->
+
+        <h3>
+            Staff Hours
+        </h3>
+
+
+        <div
+            id="staffHoursGrid"
+            class="staff-hours-grid"
+        ></div>
+
+
+
+        <!-- ALL RECORDS -->
+
+        <h3>
+            All Attendance Records
+        </h3>
+
+
+        <div class="dashboard-table-wrapper">
+
+            <table class="attendance-table dashboard-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            STAFF
+                        </th>
+
+                        <th>
+                            DATE
+                        </th>
+
+                        <th>
+                            CLOCK IN
+                        </th>
+
+                        <th>
+                            CLOCK OUT
+                        </th>
+
+                        <th>
+                            HOURS
+                        </th>
+
+                        <th>
+                            ACTION
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="allRecordsBody"></tbody>
+
+            </table>
+
+        </div>
+
+
+        <div class="dashboard-actions">
+
+            <button
+                class="clear-button"
+                onclick="clearAllRecords()"
+            >
+                Clear All Attendance
+            </button>
+
+
+            <button
+                class="close-dashboard-button"
+                onclick="closeDashboard()"
+            >
+                Close Dashboard
+            </button>
+
+        </div>
+
     </div>
 
+</div>
 
 
-    <!-- JAVASCRIPT -->
 
-    <script src="script.js"></script>
-
+<script src="script.js"></script>
 
 </body>
-
 </html>
