@@ -1,6 +1,13 @@
 /* =========================================================
-   K.P.'S KITCHEN STAFF ATTENDANCE
-   ========================================================= */
+   K.P.'s KITCHEN
+   STAFF ATTENDANCE SYSTEM
+   COMPLETE STYLE SHEET
+========================================================= */
+
+
+/* =========================================================
+   RESET
+========================================================= */
 
 * {
     margin: 0;
@@ -8,578 +15,945 @@
     box-sizing: border-box;
 }
 
-:root {
-    --black: #15191c;
-    --dark: #1d2226;
-    --gold: #c99332;
-    --gold-light: #e2b85d;
 
-    --green: #079447;
-    --green-dark: #06763a;
-
-    --blue: #2563d8;
-    --purple: #5638a7;
-
-    --text: #111a35;
-    --muted: #647089;
-
-    --background: #f4f6f9;
-    --white: #ffffff;
-    --border: #dce2ea;
-
-    --shadow: 0 8px 25px rgba(20, 30, 50, 0.07);
+html {
+    scroll-behavior: smooth;
 }
 
+
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: var(--background);
-    color: var(--text);
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+
+    background: #f5f6f8;
+
+    color: #172033;
+
+    min-height: 100vh;
+
+    line-height: 1.5;
+}
+
+
+button,
+select,
+input {
+    font-family: inherit;
+}
+
+
+button {
+    cursor: pointer;
+}
+
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
 }
 
 
 /* =========================================================
-   HEADER
-   ========================================================= */
+   MAIN PAGE
+========================================================= */
 
-.top-header {
-    height: 88px;
-    background: linear-gradient(90deg, #161a1d, #1b2024);
+.page-container {
+    width: 100%;
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   TOP NAVIGATION
+========================================================= */
+
+.top-navbar {
+
+    width: 100%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #111518,
+            #20252a
+        );
+
     color: white;
 
+    min-height: 76px;
+
+    padding: 0 42px;
+
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
-    padding: 0 38px;
-
-    border-bottom: 1px solid #333;
-
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    border-bottom: 1px solid #30353a;
 }
 
 
-/* BRAND */
+/* Restaurant branding */
 
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-}
-
-.brand-logo {
-    width: 56px;
-    height: 56px;
-
-    border: 3px solid var(--gold);
-    border-radius: 50%;
+.restaurant-brand {
 
     display: flex;
+
     align-items: center;
-    justify-content: center;
 
-    color: var(--gold);
-    font-size: 25px;
-}
-
-.brand h1 {
-    font-size: 32px;
-    line-height: 1;
-    margin-bottom: 5px;
-}
-
-.brand p {
-    color: #c6cbd0;
-    font-size: 19px;
+    gap: 13px;
 }
 
 
-/* HEADER RIGHT */
+.restaurant-logo {
 
-.header-right {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-}
+    width: 48px;
 
-.header-time {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-}
-
-.header-time > i {
-    font-size: 30px;
-    color: #d7dde5;
-}
-
-.header-time span {
-    display: block;
-    font-size: 14px;
-    color: #d1d5db;
-    margin-bottom: 4px;
-}
-
-.header-time strong {
-    display: block;
-    font-size: 21px;
-}
-
-.header-divider {
-    height: 38px;
-    width: 1px;
-    background: #596068;
-}
-
-.manager-login-btn {
-    border: 2px solid var(--gold-light);
-    background: transparent;
-    color: #f7e4ba;
+    height: 48px;
 
     border-radius: 13px;
 
-    padding: 13px 18px;
-
-    font-size: 15px;
-    font-weight: 700;
-
-    cursor: pointer;
-
-    transition: 0.2s;
-}
-
-.manager-login-btn:hover {
-    background: var(--gold);
-    color: white;
-}
-
-
-/* =========================================================
-   LAYOUT
-   ========================================================= */
-
-.layout {
-    display: flex;
-    min-height: calc(100vh - 88px);
-}
-
-
-/* =========================================================
-   SIDEBAR
-   ========================================================= */
-
-.sidebar {
-    width: 230px;
-
-    background: linear-gradient(180deg, #181d20, #111517);
+    background: #c99535;
 
     color: white;
 
-    position: fixed;
-    left: 0;
-    top: 88px;
-    bottom: 0;
-
-    padding: 27px 10px;
-
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
 
-.side-link {
-    width: 100%;
-
-    border: none;
-    background: transparent;
-
-    color: #e2e5e8;
-
-    padding: 16px 17px;
-
-    display: flex;
     align-items: center;
-    gap: 15px;
+
+    justify-content: center;
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.5px;
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+
+.restaurant-brand h1 {
+
+    font-size: 21px;
+
+    font-weight: 750;
+
+    letter-spacing: -0.3px;
+}
+
+
+.restaurant-brand p {
+
+    color: #aeb5bc;
+
+    font-size: 12px;
+
+    margin-top: 1px;
+}
+
+
+/* Manager button */
+
+.manager-login-button {
+
+    border: 1px solid #596067;
+
+    background: rgba(255, 255, 255, 0.04);
+
+    color: white;
 
     border-radius: 9px;
 
+    padding: 10px 17px;
+
+    font-size: 13px;
+
+    font-weight: 650;
+
+    transition:
+        background 0.2s ease,
+        border 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.manager-login-button:hover {
+
+    background: #c99535;
+
+    border-color: #c99535;
+
+    color: #111;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   MAIN HERO
+========================================================= */
+
+.hero-section {
+
+    max-width: 1180px;
+
+    margin: 0 auto;
+
+    padding: 48px 25px 25px;
+
+    text-align: center;
+}
+
+
+.hero-section .hero-label {
+
+    display: inline-block;
+
+    color: #b27b1d;
+
+    background: #fff5df;
+
+    border: 1px solid #f2dfb7;
+
+    border-radius: 30px;
+
+    padding: 7px 14px;
+
+    font-size: 11px;
+
+    font-weight: 750;
+
+    letter-spacing: 0.8px;
+
+    margin-bottom: 15px;
+}
+
+
+.hero-section h2 {
+
+    font-size: clamp(30px, 5vw, 48px);
+
+    line-height: 1.1;
+
+    color: #151a20;
+
+    font-weight: 800;
+
+    letter-spacing: -1.5px;
+
+    margin-bottom: 12px;
+}
+
+
+.hero-section p {
+
+    max-width: 650px;
+
+    margin: auto;
+
+    color: #697586;
+
     font-size: 16px;
+}
+
+
+/* =========================================================
+   CURRENT DATE / TIME
+========================================================= */
+
+.current-time-card {
+
+    max-width: 1180px;
+
+    margin: 5px auto 28px;
+
+    padding: 0 25px;
+}
+
+
+.current-time-inner {
+
+    background: white;
+
+    border: 1px solid #e4e7eb;
+
+    border-radius: 16px;
+
+    padding: 18px 24px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    box-shadow:
+        0 4px 18px rgba(15, 23, 42, 0.04);
+}
+
+
+.current-date {
+
+    color: #667085;
+
+    font-size: 14px;
+}
+
+
+.current-time {
+
+    color: #172033;
+
+    font-size: 24px;
+
+    font-weight: 750;
+
+    letter-spacing: -0.5px;
+}
+
+
+/* =========================================================
+   MAIN ATTENDANCE AREA
+========================================================= */
+
+.attendance-wrapper {
+
+    max-width: 1180px;
+
+    margin: 0 auto;
+
+    padding: 0 25px 50px;
+}
+
+
+/* =========================================================
+   ATTENDANCE CARD
+========================================================= */
+
+.attendance-card {
+
+    background: white;
+
+    border: 1px solid #e3e7eb;
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 8px 30px rgba(15, 23, 42, 0.06);
+}
+
+
+.attendance-header {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 28px;
+}
+
+
+.section-label {
+
+    color: #b27b1d;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+
+.attendance-header h2 {
+
+    color: #172033;
+
+    font-size: 25px;
+
+    margin: 5px 0 5px;
+
+    letter-spacing: -0.5px;
+}
+
+
+.attendance-header p {
+
+    color: #718096;
+
+    font-size: 14px;
+}
+
+
+/* System status */
+
+.online-status {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    background: #eaf8f0;
+
+    color: #087b45;
+
+    border-radius: 30px;
+
+    padding: 8px 13px;
+
+    font-size: 12px;
+
+    font-weight: 650;
+
+    white-space: nowrap;
+}
+
+
+.online-status span {
+
+    width: 8px;
+
+    height: 8px;
+
+    background: #159957;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 3px rgba(21, 153, 87, 0.12);
+}
+
+
+/* =========================================================
+   ATTENDANCE CONTROLS
+========================================================= */
+
+.attendance-controls {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(280px, 1.4fr)
+        minmax(200px, 0.8fr)
+        minmax(200px, 0.8fr);
+
+    gap: 15px;
+
+    align-items: stretch;
+}
+
+
+/* =========================================================
+   STAFF SELECTION
+========================================================= */
+
+.staff-selection {
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+
+.staff-selection label {
+
+    color: #344054;
+
+    font-size: 13px;
+
+    font-weight: 650;
 
     margin-bottom: 8px;
+}
 
-    cursor: pointer;
+
+.staff-selection select {
+
+    width: 100%;
+
+    height: 53px;
+
+    background: #fafbfc;
+
+    border: 1px solid #d9dee5;
+
+    border-radius: 11px;
+
+    padding: 0 15px;
+
+    color: #172033;
+
+    font-size: 14px;
+
+    outline: none;
+
+    appearance: auto;
+
+    transition:
+        border 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.staff-selection select:hover {
+
+    border-color: #b9c1ca;
+}
+
+
+.staff-selection select:focus {
+
+    border-color: #c99535;
+
+    box-shadow:
+        0 0 0 3px rgba(201, 149, 53, 0.12);
+}
+
+
+/* =========================================================
+   STATUS MESSAGE
+========================================================= */
+
+.status-message {
+
+    margin-top: 9px;
+
+    min-height: 19px;
+
+    font-size: 12px;
+
+    border-radius: 8px;
+
+    transition: 0.2s ease;
+}
+
+
+.status-message.info {
+
+    color: #667085;
+}
+
+
+.status-message.success {
+
+    color: #087b45;
+
+    font-weight: 600;
+}
+
+
+.status-message.error {
+
+    color: #c53030;
+
+    font-weight: 600;
+}
+
+
+.status-message.working {
+
+    color: #a76500;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   START SHIFT BUTTON
+========================================================= */
+
+.start-shift-btn,
+.end-shift-btn {
+
+    min-height: 75px;
+
+    border-radius: 12px;
+
+    padding: 12px 17px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
 
     text-align: left;
 
-    transition: 0.2s;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
 }
 
-.side-link i {
-    width: 23px;
-    font-size: 20px;
-}
 
-.side-link:hover {
-    background: rgba(255, 255, 255, 0.08);
-}
+.start-shift-btn {
 
-.side-link.active {
-    background: linear-gradient(
-        135deg,
-        #d9a23d,
-        #c28c2c
-    );
+    border: 1px solid #bd8a2c;
+
+    background:
+        linear-gradient(
+            135deg,
+            #c99535,
+            #b47b20
+        );
 
     color: white;
 
-    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.18);
+    box-shadow:
+        0 5px 15px rgba(180, 123, 32, 0.20);
 }
 
 
-/* SIDEBAR FOOTER */
+.start-shift-btn:not(:disabled):hover {
 
-.sidebar-footer {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(180, 123, 32, 0.25);
+}
+
+
+.end-shift-btn {
+
+    border: 1px solid #d8dde3;
+
+    background: #f8f9fa;
+
+    color: #26313d;
+}
+
+
+.end-shift-btn:not(:disabled):hover {
+
+    transform: translateY(-2px);
+
+    background: #eef1f4;
+
+    border-color: #c5cbd2;
+}
+
+
+.button-icon {
+
+    font-size: 20px;
+
+    width: 26px;
+
     text-align: center;
-    color: #f1f1f1;
+}
+
+
+.start-shift-btn strong,
+.end-shift-btn strong {
+
+    display: block;
+
+    font-size: 14px;
+}
+
+
+.start-shift-btn small,
+.end-shift-btn small {
+
+    display: block;
+
+    font-size: 11px;
+
+    opacity: 0.75;
+
+    margin-top: 2px;
+}
+
+
+/* =========================================================
+   TODAY'S ATTENDANCE
+========================================================= */
+
+.today-section {
+
+    margin-top: 25px;
+
+    background: white;
+
+    border: 1px solid #e3e7eb;
+
+    border-radius: 18px;
+
+    padding: 26px;
+
+    box-shadow:
+        0 6px 22px rgba(15, 23, 42, 0.04);
+}
+
+
+.today-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 18px;
+}
+
+
+.today-header h3 {
+
+    font-size: 20px;
+
+    color: #172033;
+}
+
+
+.today-header p {
+
+    color: #718096;
 
     font-size: 13px;
 }
 
-.sidebar-footer p {
-    margin: 3px 0;
-}
-
-.sidebar-footer strong {
-    display: block;
-    color: var(--gold-light);
-    margin-top: 4px;
-}
-
-.small-logo {
-    width: 48px;
-    height: 48px;
-
-    margin: 0 auto 12px;
-
-    border: 3px solid var(--gold);
-    border-radius: 50%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: var(--gold);
-    font-size: 21px;
-}
-
 
 /* =========================================================
-   MAIN CONTENT
-   ========================================================= */
+   TABLE
+========================================================= */
 
-.content {
-    margin-left: 230px;
+.table-wrapper {
 
-    width: calc(100% - 230px);
+    width: 100%;
 
-    padding: 22px 25px 40px;
-}
+    overflow-x: auto;
 
-
-/* =========================================================
-   WELCOME BANNER
-   ========================================================= */
-
-.welcome-banner {
-    min-height: 174px;
-
-    background: white;
+    border: 1px solid #e4e8ed;
 
     border-radius: 12px;
-
-    box-shadow: var(--shadow);
-
-    display: flex;
-
-    overflow: hidden;
-
-    margin-bottom: 20px;
 }
 
-.welcome-content {
-    width: 50%;
 
-    padding: 24px 30px;
+.attendance-table {
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    width: 100%;
 
-    z-index: 2;
+    border-collapse: collapse;
+
+    min-width: 700px;
 }
 
-.welcome-content > span {
-    color: #bd8120;
-    font-size: 15px;
-    font-weight: 800;
+
+.attendance-table th {
+
+    background: #20252a;
+
+    color: white;
+
+    text-align: left;
+
+    padding: 13px 15px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
 
     letter-spacing: 0.5px;
 }
 
-.welcome-content h2 {
-    font-size: 42px;
-    line-height: 1.1;
 
-    margin: 3px 0 5px;
+.attendance-table td {
 
-    color: #111a35;
-}
+    padding: 14px 15px;
 
-.welcome-content p {
-    font-size: 17px;
-    line-height: 1.45;
-    color: #36445d;
-    max-width: 510px;
-}
+    border-bottom: 1px solid #edf0f3;
 
-.gold-line {
-    width: 49px;
-    height: 5px;
-
-    background: var(--gold);
-
-    border-radius: 5px;
-
-    margin-top: 10px;
-}
-
-
-/* BANNER IMAGE */
-
-.welcome-image {
-    width: 50%;
-
-    background:
-        linear-gradient(
-            90deg,
-            white 0%,
-            rgba(255,255,255,0.65) 8%,
-            rgba(0,0,0,0.05) 100%
-        ),
-        url("https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=1200&q=80");
-
-    background-size: cover;
-    background-position: center;
-
-    position: relative;
-}
-
-.welcome-message {
-    position: absolute;
-
-    right: 42px;
-    top: 45px;
-
-    color: white;
-
-    font-family: cursive;
-
-    font-size: 32px;
-
-    transform: rotate(-5deg);
-
-    text-align: center;
-}
-
-.welcome-message span {
-    display: block;
-}
-
-
-/* =========================================================
-   STAFF CARD
-   ========================================================= */
-
-.staff-card {
-    background: white;
-
-    border-radius: 12px;
-
-    box-shadow: var(--shadow);
-
-    padding: 23px 30px;
-
-    display: flex;
-
-    min-height: 260px;
-
-    margin-bottom: 20px;
-}
-
-.staff-main {
-    flex: 1;
-
-    padding-right: 20px;
-}
-
-.section-heading {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-}
-
-.heading-icon {
-    color: #111a35;
-    font-size: 20px;
-    margin-top: 4px;
-}
-
-.section-heading > div:nth-child(2) > span {
-    color: #bd8120;
-    font-size: 16px;
-    font-weight: 800;
-}
-
-.section-heading h2 {
-    font-size: 27px;
-    margin: 2px 0 3px;
-}
-
-.section-heading p {
-    color: #637089;
-    font-size: 15px;
-}
-
-
-/* SYSTEM STATUS */
-
-.system-status {
-    float: right;
-
-    margin-top: -68px;
-
-    padding: 9px 17px;
-
-    border-radius: 20px;
-
-    background: #eaf8f0;
-
-    color: #087a3e;
-
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.status-dot {
-    display: inline-block;
-
-    width: 12px;
-    height: 12px;
-
-    background: #079447;
-
-    border-radius: 50%;
-
-    margin-right: 8px;
-}
-
-
-/* CONTROLS */
-
-.attendance-controls {
-    display: grid;
-
-    grid-template-columns: 1.35fr 1.05fr 1.05fr;
-
-    gap: 13px;
-
-    margin-top: 24px;
-
-    align-items: end;
-}
-
-.staff-selection label {
-    display: block;
-
-    font-size: 14px;
-
-    font-weight: 700;
-
-    margin-bottom: 8px;
-}
-
-.staff-selection label i {
-    margin-right: 7px;
-}
-
-.staff-selection select {
-    width: 100%;
-
-    height: 52px;
-
-    border: 1px solid #d5dce5;
-
-    border-radius: 8px;
-
-    background: white;
-
-    color: #17233f;
-
-    padding: 0 14px;
-
-    font-size: 15px;
-
-    outline: none;
-
-    cursor: pointer;
-}
-
-.staff-selection select:focus {
-    border-color: var(--gold);
-
-    box-shadow: 0 0 0 3px rgba(201, 147, 50, 0.12);
-}
-
-
-/* STAFF MESSAGE */
-
-.staff-message {
-    margin-top: 10px;
-
-    padding: 11px 13px;
-
-    border-radius: 7px;
-
-    background: #edf4fc;
-
-    color: #3c4c65;
+    color: #475467;
 
     font-size: 13px;
 }
 
-.staff-message i {
-    margin-right: 8px;
-    color: #758294;
-}
 
-.staff-message.success {
-    background: #eaf8f0;
-    color: #087a3e;
-}
+.attendance-table tbody tr:hover {
 
-.staff-message.error {
-    background: #fff0f0;
-    color: #a62525;
+    background: #fafbfc;
 }
 
 
-/* SHIFT BUTTONS */
+.attendance-table tbody tr:last-child td {
 
-.shift-btn {
-    height: 98px;
+    border-bottom: none;
+}
 
-    border: none;
+
+/* =========================================================
+   STATUS BADGES
+========================================================= */
+
+.status-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 5px 10px;
+
+    border-radius: 30px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+
+.status-badge.completed {
+
+    color: #087b45;
+
+    background: #e8f7ef;
+}
+
+
+.status-badge.working {
+
+    color: #a76500;
+
+    background: #fff3d9;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.empty-state {
+
+    text-align: center;
+
+    padding: 45px 20px !important;
+
+    color: #8a94a3 !important;
+}
+
+
+.empty-icon {
+
+    font-size: 28px;
+
+    margin-bottom: 7px;
+}
+
+
+/* =========================================================
+   SUMMARY CARDS
+========================================================= */
+
+.summary-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 16px;
+
+    margin-top: 25px;
+}
+
+
+.summary-card {
+
+    background: white;
+
+    border: 1px solid #e3e7eb;
+
+    border-radius: 15px;
+
+    padding: 20px;
+
+    box-shadow:
+        0 5px 18px rgba(15, 23, 42, 0.04);
+}
+
+
+.summary-card-label {
+
+    color: #718096;
+
+    font-size: 12px;
+
+    margin-bottom: 5px;
+}
+
+
+.summary-card-value {
+
+    color: #172033;
+
+    font-size: 25px;
+
+    font-weight: 750;
+}
+
+
+/* =========================================================
+   INFO CARDS
+========================================================= */
+
+.info-grid {
+
+    max-width: 1180px;
+
+    margin: 0 auto;
+
+    padding: 0 25px 50px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+}
+
+
+.info-card {
+
+    background: white;
+
+    border: 1px solid #e3e7eb;
+
+    border-radius: 15px;
+
+    padding: 22px;
+}
+
+
+.info-card-icon {
+
+    width: 42px;
+
+    height: 42px;
 
     border-radius: 11px;
 
@@ -589,882 +963,1419 @@ body {
 
     justify-content: center;
 
-    gap: 16px;
+    background: #fff4df;
 
-    cursor: pointer;
-
-    color: white;
-
-    text-align: left;
-
-    transition: 0.2s;
-
-    padding: 15px;
-}
-
-.shift-btn:hover:not(:disabled) {
-    transform: translateY(-2px);
-
-    box-shadow: 0 7px 17px rgba(0, 0, 0, 0.14);
-}
-
-.shift-btn:disabled {
-    opacity: 0.55;
-    cursor: not-allowed;
-}
-
-.start-btn {
-    background: linear-gradient(
-        135deg,
-        #099b4c,
-        #07863f
-    );
-}
-
-.end-btn {
-    background: linear-gradient(
-        135deg,
-        #939ba6,
-        #727a85
-    );
-}
-
-.end-btn.active {
-    background: linear-gradient(
-        135deg,
-        #df4545,
-        #bd3030
-    );
-}
-
-.button-icon {
-    font-size: 32px;
-}
-
-.shift-btn strong {
-    display: block;
-    font-size: 19px;
-}
-
-.shift-btn small {
-    display: block;
-    font-size: 12px;
-    margin-top: 5px;
-    opacity: 0.95;
-}
-
-
-/* =========================================================
-   TIME PANEL
-   ========================================================= */
-
-.time-panel {
-    width: 320px;
-
-    border-left: 1px solid #e1e5eb;
-
-    margin-left: 10px;
-
-    padding-left: 17px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-}
-
-.time-block {
-    display: flex;
-
-    align-items: center;
-
-    gap: 15px;
-}
-
-.time-block > i {
-    width: 45px;
-    font-size: 31px;
-    color: #18233c;
-}
-
-.time-block span {
-    display: block;
-
-    font-weight: 700;
-
-    font-size: 14px;
-
-    margin-bottom: 5px;
-}
-
-.time-block strong {
-    display: block;
+    margin-bottom: 12px;
 
     font-size: 18px;
 }
 
-.time-separator {
-    height: 1px;
-
-    background: #dce2ea;
-
-    margin: 22px 0;
-}
-
-
-/* =========================================================
-   ATTENDANCE GRID
-   ========================================================= */
-
-.attendance-grid {
-    display: grid;
-
-    grid-template-columns: 2.2fr 1fr;
-
-    gap: 14px;
-
-    margin-bottom: 18px;
-}
-
-
-/* ATTENDANCE CARD */
-
-.attendance-card,
-.summary-card {
-    background: white;
-
-    border-radius: 12px;
-
-    box-shadow: var(--shadow);
-
-    padding: 20px 23px;
-}
-
-.card-title > span {
-    color: #bd8120;
-
-    font-size: 14px;
-
-    font-weight: 800;
-}
-
-.card-title > span i {
-    margin-right: 8px;
-}
-
-.card-title h2 {
-    margin-top: 4px;
-
-    font-size: 25px;
-}
-
-.card-title p {
-    color: #65718a;
-
-    font-size: 14px;
-
-    margin-top: 4px;
-}
-
-
-/* TABLE */
-
-.table-container {
-    margin-top: 13px;
-
-    position: relative;
-}
-
-table {
-    width: 100%;
-
-    border-collapse: collapse;
-}
-
-thead {
-    background: #22282e;
-
-    color: white;
-}
-
-th {
-    padding: 12px 13px;
-
-    text-align: left;
-
-    font-size: 12px;
-
-    font-weight: 800;
-}
-
-td {
-    padding: 12px 13px;
-
-    border-bottom: 1px solid #edf0f3;
-
-    font-size: 13px;
-}
-
-.empty-state {
-    min-height: 125px;
-
-    border: 1px solid #dce3eb;
-
-    border-top: none;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    color: #68758b;
-}
-
-.empty-state i {
-    font-size: 37px;
-
-    color: #8894a4;
-
-    margin-bottom: 10px;
-}
-
-.empty-state p {
-    font-size: 13px;
-}
-
-
-/* STATUS */
-
-.status-working {
-    color: #087a3e;
-
-    font-weight: 700;
-}
-
-.status-completed {
-    color: #2563d8;
-
-    font-weight: 700;
-}
-
-
-/* =========================================================
-   SUMMARY
-   ========================================================= */
-
-.summary-card {
-    padding: 20px;
-}
-
-.summary-item {
-    margin-top: 13px;
-
-    border-radius: 10px;
-
-    padding: 12px;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 13px;
-}
-
-.summary-item.blue {
-    background: #edf4ff;
-    color: #1558bd;
-}
-
-.summary-item.green {
-    background: #ebf8f0;
-    color: #087a3e;
-}
-
-.summary-item.purple {
-    background: #f1edff;
-    color: #513798;
-}
-
-.summary-icon {
-    width: 45px;
-    height: 45px;
-
-    border-radius: 50%;
-
-    background: rgba(255,255,255,0.65);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 19px;
-}
-
-.summary-item span {
-    display: block;
-
-    font-size: 12px;
-
-    margin-bottom: 4px;
-}
-
-.summary-item strong {
-    display: block;
-
-    font-size: 22px;
-}
-
-
-/* =========================================================
-   INFO CARDS
-   ========================================================= */
-
-.info-grid {
-    display: grid;
-
-    grid-template-columns: repeat(3, 1fr);
-
-    gap: 14px;
-}
-
-.info-card {
-    background: white;
-
-    border-radius: 10px;
-
-    padding: 17px;
-
-    box-shadow: var(--shadow);
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 15px;
-}
-
-.info-icon {
-    min-width: 56px;
-    height: 56px;
-
-    background: #1e2327;
-
-    color: white;
-
-    border-radius: 50%;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 23px;
-}
 
 .info-card h3 {
-    font-size: 15px;
+
+    color: #172033;
+
+    font-size: 16px;
 
     margin-bottom: 6px;
 }
 
+
 .info-card p {
-    color: #65718a;
 
-    font-size: 12px;
+    color: #718096;
 
-    line-height: 1.5;
+    font-size: 13px;
 }
 
 
 /* =========================================================
-   MODAL
-   ========================================================= */
+   FOOTER
+========================================================= */
 
-.modal,
-.dashboard-modal {
-    display: none;
+.site-footer {
+
+    background: #15191d;
+
+    color: #9ba3ab;
+
+    text-align: center;
+
+    padding: 25px;
+
+    font-size: 12px;
+}
+
+
+.site-footer strong {
+
+    color: white;
+}
+
+
+/* =========================================================
+   MANAGER LOGIN MODAL
+========================================================= */
+
+#managerModal {
 
     position: fixed;
 
     inset: 0;
 
-    background: rgba(10, 14, 18, 0.72);
+    z-index: 9000;
 
-    z-index: 500;
+    display: none;
 
     align-items: center;
 
     justify-content: center;
 
     padding: 20px;
+
+    background:
+        rgba(8, 12, 16, 0.68);
+
+    backdrop-filter: blur(5px);
 }
 
-.modal.show,
-.dashboard-modal.show {
+
+#managerModal.show {
+
     display: flex;
+
+    animation: fadeIn 0.2s ease;
 }
 
-.modal-box {
-    width: 420px;
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* Login box */
+
+.manager-login-box {
+
+    width: 100%;
+
+    max-width: 430px;
 
     background: white;
 
-    border-radius: 15px;
+    border-radius: 20px;
 
-    padding: 32px;
+    padding: 30px;
 
-    position: relative;
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.25);
 
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    animation: modalUp 0.25s ease;
 }
 
-.close-modal {
-    position: absolute;
 
-    right: 17px;
-    top: 17px;
+@keyframes modalUp {
 
-    width: 35px;
-    height: 35px;
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.98);
+    }
 
-    border: none;
-
-    background: #f0f2f5;
-
-    border-radius: 50%;
-
-    cursor: pointer;
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
-.modal-icon {
-    width: 60px;
-    height: 60px;
 
-    border-radius: 50%;
+.manager-login-header {
 
-    background: #f8ecd5;
+    text-align: center;
 
-    color: #bd8120;
+    margin-bottom: 25px;
+}
+
+
+.manager-login-icon {
+
+    width: 58px;
+
+    height: 58px;
+
+    border-radius: 16px;
+
+    background: #fff3dc;
+
+    color: #b27b1d;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
+    margin: 0 auto 13px;
+
     font-size: 25px;
-
-    margin-bottom: 14px;
 }
 
-.modal-box h2 {
-    font-size: 27px;
 
-    margin-bottom: 6px;
+.manager-login-header h2 {
+
+    color: #172033;
+
+    font-size: 23px;
+
+    margin-bottom: 5px;
 }
 
-.modal-box > p {
-    color: #69758b;
 
-    font-size: 14px;
+.manager-login-header p {
 
-    margin-bottom: 20px;
+    color: #718096;
+
+    font-size: 13px;
 }
 
-.modal-box label {
+
+/* Login fields */
+
+.login-field {
+
+    margin-bottom: 17px;
+}
+
+
+.login-field label {
+
     display: block;
+
+    color: #344054;
 
     font-size: 13px;
 
-    font-weight: 700;
+    font-weight: 650;
 
-    margin: 13px 0 6px;
+    margin-bottom: 7px;
 }
 
-.modal-box input {
+
+.login-field input {
+
     width: 100%;
 
-    height: 46px;
+    height: 48px;
 
-    border: 1px solid #d5dce5;
+    border: 1px solid #d9dee5;
 
-    border-radius: 7px;
+    border-radius: 10px;
 
-    padding: 0 12px;
+    padding: 0 13px;
 
     outline: none;
 
     font-size: 14px;
+
+    color: #172033;
+
+    background: #fafbfc;
 }
 
-.modal-box input:focus {
-    border-color: var(--gold);
+
+.login-field input:focus {
+
+    border-color: #c99535;
+
+    background: white;
+
+    box-shadow:
+        0 0 0 3px rgba(201, 149, 53, 0.11);
 }
 
-.login-submit {
-    width: 100%;
 
-    height: 47px;
+.manager-login-error {
 
-    border: none;
+    min-height: 20px;
 
-    background: #171b1f;
-
-    color: white;
-
-    border-radius: 8px;
-
-    font-weight: 700;
-
-    margin-top: 17px;
-
-    cursor: pointer;
-}
-
-.login-error {
-    display: none;
-
-    color: #b52c2c;
-
-    background: #fff0f0;
-
-    padding: 9px;
-
-    border-radius: 6px;
+    color: #c53030;
 
     font-size: 12px;
 
-    margin-top: 10px;
+    text-align: center;
+
+    margin-bottom: 10px;
+}
+
+
+.manager-login-actions {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+}
+
+
+.cancel-login-btn {
+
+    height: 47px;
+
+    border-radius: 10px;
+
+    border: 1px solid #d8dde3;
+
+    background: #f8f9fa;
+
+    color: #344054;
+
+    font-weight: 650;
+}
+
+
+.cancel-login-btn:hover {
+
+    background: #eef1f4;
+}
+
+
+.submit-login-btn {
+
+    height: 47px;
+
+    border-radius: 10px;
+
+    border: none;
+
+    background:
+        linear-gradient(
+            135deg,
+            #c99535,
+            #b47b20
+        );
+
+    color: white;
+
+    font-weight: 700;
+}
+
+
+.submit-login-btn:hover {
+
+    box-shadow:
+        0 6px 15px rgba(180, 123, 32, 0.25);
 }
 
 
 /* =========================================================
-   DASHBOARD
-   ========================================================= */
+   FULL MANAGER DASHBOARD
+========================================================= */
 
-.dashboard-box {
-    width: min(1100px, 96vw);
+.dashboard-overlay {
 
-    max-height: 90vh;
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    background: #f4f6f8;
+
+    z-index: 9999;
+
+    display: none;
 
     overflow-y: auto;
-
-    background: #f6f7f9;
-
-    border-radius: 15px;
-
-    padding: 25px;
 }
 
+
+.dashboard-overlay.show {
+
+    display: block;
+
+    animation: dashboardOpen 0.25s ease;
+}
+
+
+@keyframes dashboardOpen {
+
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   DASHBOARD HEADER
+========================================================= */
+
+.manager-dashboard {
+
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f7f8fa 0%,
+            #eef1f4 100%
+        );
+}
+
+
 .dashboard-header {
+
+    min-height: 88px;
+
+    padding: 0 42px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #15191d,
+            #20252a
+        );
+
+    color: white;
+
     display: flex;
 
     align-items: center;
 
     justify-content: space-between;
 
-    margin-bottom: 20px;
+    border-bottom: 1px solid #333;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 20;
 }
 
-.dashboard-header span {
-    color: #bd8120;
+
+.dashboard-brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+
+.dashboard-logo {
+
+    width: 50px;
+
+    height: 50px;
+
+    border-radius: 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #c99535;
+
+    color: white;
+
+    font-size: 20px;
 
     font-weight: 800;
+}
+
+
+.dashboard-brand h1 {
+
+    margin: 0;
+
+    font-size: 25px;
+
+    font-weight: 750;
+}
+
+
+.dashboard-brand p {
+
+    margin: 3px 0 0;
+
+    color: #c5c9ce;
+
+    font-size: 14px;
+}
+
+
+.dashboard-header-right {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 28px;
+}
+
+
+.dashboard-date {
+
+    display: flex;
+
+    flex-direction: column;
+
+    text-align: right;
+
+    gap: 3px;
+}
+
+
+.dashboard-date span {
+
+    color: #c5c9ce;
 
     font-size: 13px;
 }
 
-.dashboard-header h2 {
-    font-size: 28px;
 
-    margin-top: 4px;
-}
-
-.dashboard-header p {
-    color: #68758b;
-
-    margin-top: 4px;
-}
-
-.dashboard-header button {
-    width: 40px;
-    height: 40px;
-
-    border: none;
-
-    background: #e7eaee;
-
-    border-radius: 50%;
-
-    cursor: pointer;
-}
-
-
-/* DASHBOARD STATS */
-
-.dashboard-stats {
-    display: grid;
-
-    grid-template-columns: repeat(3, 1fr);
-
-    gap: 13px;
-
-    margin-bottom: 24px;
-}
-
-.dashboard-stats > div {
-    background: white;
-
-    border-radius: 10px;
-
-    padding: 18px;
-
-    box-shadow: var(--shadow);
-}
-
-.dashboard-stats span {
-    display: block;
-
-    color: #68758b;
-
-    font-size: 13px;
-
-    margin-bottom: 7px;
-}
-
-.dashboard-stats strong {
-    font-size: 26px;
-}
-
-
-/* STAFF HOURS */
-
-.dashboard-section-title {
-    margin: 20px 0 12px;
+.dashboard-date strong {
 
     font-size: 18px;
 }
 
-.staff-hours-grid {
-    display: grid;
 
-    grid-template-columns: repeat(4, 1fr);
+.close-dashboard-btn {
 
-    gap: 10px;
-}
+    border: 1px solid #c99535;
 
-.staff-hour-card {
-    background: white;
+    background: transparent;
 
-    border-radius: 9px;
-
-    padding: 15px;
-
-    box-shadow: var(--shadow);
-
-    border-left: 4px solid var(--gold);
-}
-
-.staff-hour-card span {
-    display: block;
-
-    font-size: 13px;
-
-    color: #667289;
-}
-
-.staff-hour-card strong {
-    display: block;
-
-    font-size: 21px;
-
-    margin-top: 5px;
-}
-
-
-/* DASHBOARD TABLE */
-
-.dashboard-table-wrapper {
-    background: white;
-
-    border-radius: 9px;
-
-    overflow-x: auto;
-
-    box-shadow: var(--shadow);
-}
-
-.dashboard-table-wrapper table {
-    min-width: 800px;
-}
-
-.dashboard-actions {
-    display: flex;
-
-    justify-content: flex-end;
-
-    gap: 10px;
-
-    margin-top: 18px;
-}
-
-.danger-btn,
-.secondary-btn {
-    border: none;
-
-    border-radius: 7px;
-
-    padding: 11px 16px;
-
-    cursor: pointer;
-
-    font-weight: 700;
-}
-
-.danger-btn {
-    background: #ffe8e8;
-    color: #b42323;
-}
-
-.secondary-btn {
-    background: #1c2226;
     color: white;
-}
 
-.delete-btn {
-    border: none;
+    border-radius: 10px;
 
-    background: #ffe7e7;
+    padding: 11px 18px;
 
-    color: #b42323;
+    font-size: 14px;
 
-    padding: 6px 9px;
-
-    border-radius: 5px;
+    font-weight: 600;
 
     cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.close-dashboard-btn:hover {
+
+    background: #c99535;
+
+    color: #111;
 }
 
 
 /* =========================================================
-   RESPONSIVE
-   ========================================================= */
+   DASHBOARD CONTENT
+========================================================= */
 
-@media (max-width: 1100px) {
+.dashboard-content {
 
-    .header-right {
-        gap: 12px;
-    }
+    max-width: 1450px;
 
-    .header-time {
-        display: none;
-    }
+    margin: auto;
 
-    .attendance-grid {
-        grid-template-columns: 1fr;
-    }
+    padding: 35px 40px 60px;
+}
 
-    .info-grid {
-        grid-template-columns: 1fr;
-    }
+
+.dashboard-title {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 25px;
+}
+
+
+.dashboard-label,
+.panel-label {
+
+    color: #c08726;
+
+    font-size: 13px;
+
+    font-weight: 750;
+
+    letter-spacing: 0.8px;
+}
+
+
+.dashboard-title h2 {
+
+    margin: 5px 0 4px;
+
+    color: #111827;
+
+    font-size: 32px;
+}
+
+
+.dashboard-title p {
+
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 15px;
+}
+
+
+.system-online-large {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    background: #e8f7ef;
+
+    color: #087b45;
+
+    padding: 10px 16px;
+
+    border-radius: 30px;
+
+    font-size: 13px;
+
+    font-weight: 650;
+}
+
+
+.system-online-large span {
+
+    width: 9px;
+
+    height: 9px;
+
+    border-radius: 50%;
+
+    background: #159957;
+}
+
+
+/* =========================================================
+   MANAGER SUMMARY
+========================================================= */
+
+.manager-summary-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 25px;
+}
+
+
+.manager-summary-card {
+
+    background: white;
+
+    border-radius: 16px;
+
+    padding: 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    border: 1px solid #e6e9ed;
+
+    box-shadow:
+        0 5px 18px rgba(15, 23, 42, 0.05);
+}
+
+
+.summary-icon {
+
+    width: 52px;
+
+    height: 52px;
+
+    border-radius: 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 22px;
+}
+
+
+.manager-summary-card.blue
+.summary-icon {
+
+    background: #e8f1ff;
+}
+
+
+.manager-summary-card.green
+.summary-icon {
+
+    background: #e8f8ef;
+}
+
+
+.manager-summary-card.purple
+.summary-icon {
+
+    background: #f0ebff;
+}
+
+
+.manager-summary-card.orange
+.summary-icon {
+
+    background: #fff3df;
+}
+
+
+.manager-summary-card span {
+
+    display: block;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    margin-bottom: 5px;
+}
+
+
+.manager-summary-card strong {
+
+    display: block;
+
+    color: #172033;
+
+    font-size: 25px;
+}
+
+
+/* =========================================================
+   DASHBOARD PANELS
+========================================================= */
+
+.dashboard-panel {
+
+    background: white;
+
+    border: 1px solid #e5e8ec;
+
+    border-radius: 18px;
+
+    padding: 26px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 5px 18px rgba(15, 23, 42, 0.045);
+}
+
+
+.panel-heading {
+
+    margin-bottom: 20px;
+}
+
+
+.panel-heading h3 {
+
+    margin: 4px 0 4px;
+
+    font-size: 22px;
+
+    color: #172033;
+}
+
+
+.panel-heading p {
+
+    margin: 0;
+
+    color: #718096;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   STAFF HOURS
+========================================================= */
+
+.staff-hours-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+}
+
+
+.staff-hours-card {
+
+    border: 1px solid #e5e9ee;
+
+    border-radius: 14px;
+
+    padding: 18px;
+
+    background: #fafbfc;
+
+    transition: 0.2s;
+}
+
+
+.staff-hours-card:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 18px rgba(15, 23, 42, 0.08);
+}
+
+
+.staff-hours-name {
+
+    font-weight: 700;
+
+    font-size: 16px;
+
+    color: #172033;
+
+    margin-bottom: 10px;
+}
+
+
+.staff-hours-total {
+
+    font-size: 25px;
+
+    font-weight: 750;
+
+    color: #c08726;
+}
+
+
+.staff-hours-status {
+
+    margin-top: 7px;
+
+    font-size: 12px;
+
+    color: #718096;
+}
+
+
+.staff-hours-status.active {
+
+    color: #07834c;
+
+    font-weight: 650;
+}
+
+
+/* =========================================================
+   RECORDS PANEL
+========================================================= */
+
+.records-heading {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+
+.clear-records-btn {
+
+    background: #fff0f0;
+
+    color: #c53030;
+
+    border: 1px solid #ffd2d2;
+
+    padding: 10px 15px;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+.clear-records-btn:hover {
+
+    background: #c53030;
+
+    color: white;
+}
+
+
+.records-table-wrapper {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    border: 1px solid #e4e8ed;
+
+    border-radius: 12px;
+}
+
+
+.manager-records-table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 900px;
+}
+
+
+.manager-records-table th {
+
+    background: #20252a;
+
+    color: white;
+
+    padding: 14px 16px;
+
+    text-align: left;
+
+    font-size: 12px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.4px;
+
+    white-space: nowrap;
+}
+
+
+.manager-records-table td {
+
+    padding: 15px 16px;
+
+    border-bottom: 1px solid #edf0f3;
+
+    color: #344054;
+
+    font-size: 14px;
+
+    white-space: nowrap;
+}
+
+
+.manager-records-table tbody tr:hover {
+
+    background: #fafbfc;
+}
+
+
+.manager-records-table tbody tr:last-child td {
+
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   DELETE BUTTON
+========================================================= */
+
+.delete-btn {
+
+    border: none;
+
+    background: #fff0f0;
+
+    color: #c53030;
+
+    border-radius: 7px;
+
+    padding: 7px 10px;
+
+    cursor: pointer;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    transition: 0.2s;
+}
+
+
+.delete-btn:hover {
+
+    background: #c53030;
+
+    color: white;
+}
+
+
+/* =========================================================
+   EMPTY DASHBOARD
+========================================================= */
+
+.empty-dashboard {
+
+    text-align: center;
+
+    padding: 45px !important;
+
+    color: #8a94a3 !important;
+}
+
+
+/* =========================================================
+   GENERAL UTILITY
+========================================================= */
+
+.hidden {
+    display: none !important;
+}
+
+
+.text-center {
+    text-align: center;
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
 
     .attendance-controls {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+            1fr 1fr;
     }
 
-    .time-panel {
-        display: none;
+
+    .staff-selection {
+
+        grid-column: 1 / -1;
     }
 
-    .staff-card {
-        display: block;
+
+    .manager-summary-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
     }
 
-    .staff-main {
-        padding-right: 0;
-    }
 
     .staff-hours-grid {
-        grid-template-columns: repeat(2, 1fr);
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .dashboard-content {
+
+        padding-left: 25px;
+
+        padding-right: 25px;
     }
 }
 
 
-@media (max-width: 750px) {
+/* =========================================================
+   RESPONSIVE - MOBILE
+========================================================= */
 
-    .top-header {
-        height: auto;
-        padding: 14px;
+@media (max-width: 700px) {
+
+    .top-navbar {
+
+        padding: 14px 18px;
+
+        min-height: 70px;
     }
 
-    .brand h1 {
-        font-size: 23px;
-    }
 
-    .brand p {
-        font-size: 13px;
-    }
+    .restaurant-brand h1 {
 
-    .brand-logo {
-        width: 43px;
-        height: 43px;
-    }
-
-    .manager-login-btn {
-        font-size: 0;
-        padding: 12px;
-    }
-
-    .manager-login-btn i {
         font-size: 17px;
     }
 
-    .sidebar {
-        display: none;
+
+    .restaurant-brand p {
+
+        font-size: 10px;
     }
 
-    .content {
-        margin-left: 0;
-        width: 100%;
 
-        padding: 14px;
+    .restaurant-logo {
+
+        width: 42px;
+
+        height: 42px;
+
+        border-radius: 11px;
+
+        font-size: 15px;
     }
 
-    .welcome-banner {
-        min-height: 190px;
+
+    .manager-login-button {
+
+        padding: 9px 11px;
+
+        font-size: 11px;
     }
 
-    .welcome-content {
-        width: 100%;
-        padding: 23px;
+
+    .hero-section {
+
+        padding-top: 35px;
+
+        padding-left: 18px;
+
+        padding-right: 18px;
     }
 
-    .welcome-content h2 {
+
+    .hero-section h2 {
+
         font-size: 32px;
     }
 
-    .welcome-image {
-        display: none;
+
+    .hero-section p {
+
+        font-size: 14px;
     }
 
-    .staff-card {
+
+    .current-time-card {
+
+        padding: 0 18px;
+    }
+
+
+    .current-time-inner {
+
+        display: block;
+
+        text-align: center;
+    }
+
+
+    .current-time {
+
+        margin-top: 4px;
+
+        font-size: 21px;
+    }
+
+
+    .attendance-wrapper {
+
+        padding-left: 18px;
+
+        padding-right: 18px;
+    }
+
+
+    .attendance-card {
+
         padding: 20px;
+
+        border-radius: 16px;
     }
 
-    .system-status {
-        float: none;
-        display: inline-block;
-        margin: 15px 0 0;
+
+    .attendance-header {
+
+        display: block;
     }
 
-    .staff-hours-grid {
+
+    .online-status {
+
+        width: fit-content;
+
+        margin-top: 13px;
+    }
+
+
+    .attendance-controls {
+
         grid-template-columns: 1fr;
     }
 
-    .dashboard-stats {
+
+    .staff-selection {
+
+        grid-column: auto;
+    }
+
+
+    .start-shift-btn,
+    .end-shift-btn {
+
+        width: 100%;
+    }
+
+
+    .summary-grid {
+
+        grid-template-columns: 1fr;
+
+        margin-left: 18px;
+
+        margin-right: 18px;
+    }
+
+
+    .info-grid {
+
+        grid-template-columns: 1fr;
+
+        padding-left: 18px;
+
+        padding-right: 18px;
+    }
+
+
+    .today-section {
+
+        margin-left: 0;
+
+        margin-right: 0;
+
+        padding: 20px;
+    }
+
+
+    /* Manager dashboard */
+
+    .dashboard-header {
+
+        min-height: auto;
+
+        padding: 17px;
+
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+
+    .dashboard-brand h1 {
+
+        font-size: 18px;
+    }
+
+
+    .dashboard-brand p {
+
+        font-size: 11px;
+    }
+
+
+    .dashboard-logo {
+
+        width: 43px;
+
+        height: 43px;
+
+        font-size: 17px;
+    }
+
+
+    .dashboard-header-right {
+
+        gap: 8px;
+    }
+
+
+    .dashboard-date {
+
+        display: none;
+    }
+
+
+    .close-dashboard-btn {
+
+        padding: 9px 11px;
+
+        font-size: 11px;
+    }
+
+
+    .dashboard-content {
+
+        padding: 22px 15px 40px;
+    }
+
+
+    .dashboard-title {
+
+        display: block;
+    }
+
+
+    .dashboard-title h2 {
+
+        font-size: 27px;
+    }
+
+
+    .dashboard-title p {
+
+        font-size: 13px;
+    }
+
+
+    .system-online-large {
+
+        width: fit-content;
+
+        margin-top: 14px;
+    }
+
+
+    .manager-summary-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+
+    .manager-summary-card {
+
+        padding: 18px;
+    }
+
+
+    .staff-hours-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .dashboard-panel {
+
+        padding: 18px;
+
+        border-radius: 15px;
+    }
+
+
+    .records-heading {
+
+        display: block;
+    }
+
+
+    .clear-records-btn {
+
+        margin-top: 15px;
+
+        width: 100%;
+    }
+
+
+    .manager-login-box {
+
+        padding: 24px;
+
+        border-radius: 17px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .restaurant-brand p {
+
+        display: none;
+    }
+
+
+    .restaurant-brand h1 {
+
+        font-size: 15px;
+    }
+
+
+    .manager-login-button {
+
+        padding: 8px 9px;
+
+        font-size: 10px;
+    }
+
+
+    .hero-section h2 {
+
+        font-size: 28px;
+    }
+
+
+    .attendance-header h2 {
+
+        font-size: 22px;
+    }
+
+
+    .manager-login-actions {
+
         grid-template-columns: 1fr;
     }
 }
